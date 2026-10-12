@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" role="img" aria-label="TEMPO app preview: dashboard, rest timer and history screens" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozYWIxNTRmYi0wNmJiLTRiNzYtYWFkMC0yOTJkNjM5N2Q4ZWIAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaI0ga2i1eyYtWIvHo14TYQgAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDowMzllMWJjYi0wMzhmLTQxMDAtYWY4Ny05NjFiZTFkZDBhZDVscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNofFxeeTmsfHGIOoYDxy47mgAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggKJUmJbUt7T3LoDs2/KyrkLXurlPQygyjSckDq3DoQPCkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaEx0O7zaLgA0oEWbNLkPIxEAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCABxOiWfQb6cOLqnX3dyxX1NTVea5zRLhQKVyQFmh2oLGRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjtZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNhYjE1NGZiLTA2YmItNGI3Ni1hYWQwLTI5MmQ2Mzk3ZDhlYi9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjFkN2E1ODNmLTg3YzgtNDM0Zi04NDhhLWJiNDk5NTJlYTcwZHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCAolSYltS3tPcugOzb8rKuQte6uU9DKDKNJyQOrcOhA8KJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggC+mmnqxw3GZqI8bbUmGF+S5Hd1S7rgeLQkygFvJ7ltWiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggoM1ixFaY7wiYyksJ+H+mI+XppQu2SA3I7spxqAw6K9t0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJVmB3Cjywr4kLTw9kBEpcpSibbC9GAVY9abEaxS12/wDSt3P9+MnFoauaK35vFCBxjgAfcnTk4vjSc8LeGtKyQ=</c2pa:manifest></metadata>
+  <defs>
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5EEAD4"/><stop offset="1" stop-color="#4FD1C7"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#243240"/><stop offset="1" stop-color="#1f2b35"/></linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="145%">
+      <feDropShadow dx="6" dy="6" stdDeviation="7" flood-color="#000" flood-opacity="0.5"/>
+      <feDropShadow dx="-4" dy="-4" stdDeviation="6" flood-color="#506d7d" flood-opacity="0.10"/>
+    </filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="4"/></filter>
+  </defs>
+  <style>
+    .t{font-family:Inter,'Segoe UI',Arial,sans-serif}
+    .m{font-family:'JetBrains Mono','Courier New',monospace}
+  </style>
+  <rect width="1000" height="640" rx="28" fill="#141d25"/>
+
+  <!-- ============ PHONE 1: DASHBOARD ============ -->
+  <g transform="translate(40 30)">
+    <rect width="280" height="580" rx="34" fill="#1a242c" stroke="#243240" stroke-width="3" filter="url(#sh)"/>
+    <circle cx="26" cy="34" r="4" fill="#4FD1C7"/>
+    <text x="40" y="38" class="t" font-size="11" font-weight="800" letter-spacing="2" fill="#e2e8f0">TEMPO</text>
+    <text x="22" y="82" class="m" font-size="9" letter-spacing="2" fill="#5d6b7c">GOOD MORNING</text>
+    <text x="22" y="108" class="t" font-size="24" font-weight="800" fill="#e2e8f0">Alex</text>
+    <text x="22" y="126" class="m" font-size="9" fill="#8a9aab">MONDAY · OCT 5</text>
+
+    <rect x="18" y="146" width="244" height="190" rx="22" fill="url(#card)" filter="url(#sh)"/>
+    <text x="36" y="176" class="m" font-size="9" letter-spacing="2" fill="#8a9aab">TODAY'S WORKOUT</text>
+    <text x="36" y="206" class="t" font-size="22" font-weight="800" fill="#e2e8f0">Full Body A</text>
+    <text x="36" y="226" class="t" font-size="11" fill="#8a9aab">Squats · Push-ups · Rows · Plank</text>
+    <text x="36" y="266" class="m" font-size="24" font-weight="700" fill="#5EEAD4">4</text>
+    <text x="36" y="280" class="m" font-size="8" letter-spacing="1.5" fill="#5d6b7c">EXERCISES</text>
+    <text x="130" y="266" class="m" font-size="24" font-weight="700" fill="#5EEAD4">12</text>
+    <text x="130" y="280" class="m" font-size="8" letter-spacing="1.5" fill="#5d6b7c">SETS</text>
+    <rect x="34" y="294" width="212" height="30" rx="15" fill="url(#btn)"/>
+    <text x="140" y="314" text-anchor="middle" class="t" font-size="12" font-weight="800" fill="#0a141a">▶  Start Workout</text>
+
+    <text x="22" y="368" class="m" font-size="9" letter-spacing="2" fill="#8a9aab">WEEKLY PLAN</text>
+    <g class="t" font-size="12">
+      <rect x="18" y="380" width="244" height="36" rx="12" fill="#1f2b35"/><text x="34" y="403" fill="#e2e8f0">Monday</text><text x="246" y="403" text-anchor="end" fill="#5EEAD4" class="m" font-size="10">Full Body A</text>
+      <rect x="18" y="424" width="244" height="36" rx="12" fill="#1f2b35"/><text x="34" y="447" fill="#e2e8f0">Tuesday</text><text x="246" y="447" text-anchor="end" fill="#5d6b7c" class="m" font-size="10">Recovery</text>
+      <rect x="18" y="468" width="244" height="36" rx="12" fill="#1f2b35"/><text x="34" y="491" fill="#e2e8f0">Wednesday</text><text x="246" y="491" text-anchor="end" fill="#5EEAD4" class="m" font-size="10">Full Body B</text>
+    </g>
+    <g class="t" font-size="9" fill="#5d6b7c" text-anchor="middle">
+      <text x="50" y="560" fill="#4FD1C7" font-weight="700">HOME</text><text x="115" y="560">HISTORY</text><text x="180" y="560">PLAN</text><text x="240" y="560">PROFILE</text>
+    </g>
+  </g>
+
+  <!-- ============ PHONE 2: REST TIMER ============ -->
+  <g transform="translate(360 30)">
+    <rect width="280" height="580" rx="34" fill="#1a242c" stroke="#243240" stroke-width="3" filter="url(#sh)"/>
+    <circle cx="26" cy="34" r="4" fill="#4FD1C7"/>
+    <text x="40" y="38" class="t" font-size="11" font-weight="800" letter-spacing="2" fill="#e2e8f0">TEMPO</text>
+    <text x="140" y="86" text-anchor="middle" class="m" font-size="9" letter-spacing="2" fill="#8a9aab">SQUATS · SET 2 OF 3</text>
+    <text x="140" y="112" text-anchor="middle" class="t" font-size="22" font-weight="800" fill="#e2e8f0">Rest up</text>
+
+    <circle cx="140" cy="245" r="92" fill="none" stroke="#243240" stroke-width="12"/>
+    <circle cx="140" cy="245" r="92" fill="none" stroke="#4FD1C7" stroke-width="12" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="190" transform="rotate(-90 140 245)" opacity="0.5" filter="url(#glow)"/>
+    <circle cx="140" cy="245" r="92" fill="none" stroke="#5EEAD4" stroke-width="12" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="190" transform="rotate(-90 140 245)"/>
+    <text x="140" y="258" text-anchor="middle" class="m" font-size="44" font-weight="700" fill="#e2e8f0">01:03</text>
+    <text x="140" y="280" text-anchor="middle" class="m" font-size="9" letter-spacing="2" fill="#5d6b7c">REMAINING</text>
+
+    <g class="m" font-size="11" font-weight="700" text-anchor="middle">
+      <rect x="22" y="368" width="64" height="38" rx="19" fill="#243240"/><text x="54" y="392" fill="#8a9aab">−15</text>
+      <rect x="108" y="368" width="64" height="38" rx="19" fill="#243240"/><text x="140" y="392" fill="#F6A623">PAUSE</text>
+      <rect x="194" y="368" width="64" height="38" rx="19" fill="#243240"/><text x="226" y="392" fill="#8a9aab">+15</text>
+    </g>
+    <rect x="22" y="424" width="236" height="38" rx="19" fill="url(#btn)"/>
+    <text x="140" y="448" text-anchor="middle" class="t" font-size="12" font-weight="800" fill="#0a141a">Skip Rest</text>
+
+    <rect x="18" y="490" width="244" height="46" rx="16" fill="#1f2b35"/>
+    <text x="34" y="510" class="m" font-size="8" letter-spacing="1.5" fill="#5d6b7c">NOW PLAYING</text>
+    <text x="34" y="526" class="t" font-size="11" fill="#e2e8f0">Gym Motivation Music Mix</text>
+    <text x="244" y="522" text-anchor="end" font-size="14" fill="#5EEAD4">♪</text>
+  </g>
+
+  <!-- ============ PHONE 3: HISTORY ============ -->
+  <g transform="translate(680 30)">
+    <rect width="280" height="580" rx="34" fill="#1a242c" stroke="#243240" stroke-width="3" filter="url(#sh)"/>
+    <circle cx="26" cy="34" r="4" fill="#4FD1C7"/>
+    <text x="40" y="38" class="t" font-size="11" font-weight="800" letter-spacing="2" fill="#e2e8f0">TEMPO</text>
+    <text x="22" y="82" class="m" font-size="9" letter-spacing="2" fill="#5d6b7c">HISTORY</text>
+    <text x="22" y="108" class="t" font-size="24" font-weight="800" fill="#e2e8f0">Your receipts</text>
+
+    <rect x="18" y="132" width="244" height="168" rx="20" fill="url(#card)" filter="url(#sh)"/>
+    <text x="36" y="160" class="t" font-size="15" font-weight="800" fill="#e2e8f0">Full Body B</text>
+    <text x="244" y="160" text-anchor="end" class="m" font-size="9" fill="#8a9aab">WED · 42 MIN</text>
+    <text x="36" y="192" class="t" font-size="12" fill="#8a9aab">Pull-ups</text>
+    <text x="244" y="192" text-anchor="end" class="m" font-size="13" font-weight="700" fill="#e2e8f0">8 / 7 / 6</text>
+    <text x="244" y="208" text-anchor="end" class="m" font-size="9" fill="#5EEAD4">▲ +1 vs last time</text>
+    <text x="36" y="236" class="t" font-size="12" fill="#8a9aab">Overhead Press</text>
+    <text x="244" y="236" text-anchor="end" class="m" font-size="13" font-weight="700" fill="#e2e8f0">10 / 9 / 8</text>
+    <text x="244" y="252" text-anchor="end" class="m" font-size="9" fill="#5EEAD4">▲ +2 vs last time</text>
+    <text x="36" y="280" class="t" font-size="12" fill="#8a9aab">Lunges</text>
+    <text x="244" y="280" text-anchor="end" class="m" font-size="13" font-weight="700" fill="#e2e8f0">12 / 12 / 10</text>
+    <text x="244" y="294" text-anchor="end" class="m" font-size="9" fill="#ef5350">▼ −2 vs last time</text>
+
+    <rect x="18" y="316" width="244" height="54" rx="16" fill="#1f2b35"/>
+    <text x="34" y="340" class="t" font-size="13" font-weight="700" fill="#e2e8f0">Full Body A</text>
+    <text x="34" y="357" class="m" font-size="9" fill="#5d6b7c">MON · 38 MIN</text>
+    <text x="246" y="352" text-anchor="end" fill="#8a9aab" font-size="16">›</text>
+    <rect x="18" y="380" width="244" height="54" rx="16" fill="#1f2b35"/>
+    <text x="34" y="404" class="t" font-size="13" font-weight="700" fill="#e2e8f0">Cindy</text>
+    <text x="34" y="421" class="m" font-size="9" fill="#F6A623">20 MIN AMRAP · 14 ROUNDS</text>
+    <text x="246" y="416" text-anchor="end" fill="#8a9aab" font-size="16">›</text>
+    <g class="t" font-size="9" fill="#5d6b7c" text-anchor="middle">
+      <text x="50" y="560">HOME</text><text x="115" y="560" fill="#4FD1C7" font-weight="700">HISTORY</text><text x="180" y="560">PLAN</text><text x="240" y="560">PROFILE</text>
+    </g>
+  </g>
+</svg>
