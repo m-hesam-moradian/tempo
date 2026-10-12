@@ -933,6 +933,54 @@ function openDayView(dayId) {
         overview.appendChild(altSection);
       }
 
+      // "Do Cindy" option — if the plan has a cindy day or the restNote mentions Cindy
+      const cindyDay = plan.days.find(d => d.type === 'cindy' || (d.cindy && d.cindy.scheme));
+      const restNoteMentionsCindy = (day.restNote || '').toLowerCase().includes('cindy');
+      if (cindyDay || restNoteMentionsCindy) {
+        const cindyCard = document.createElement('div');
+        cindyCard.className = 'backup-rest-card neu-raised-sm';
+        cindyCard.style.borderColor = 'rgba(79, 209, 199, 0.3)';
+        const cindyToUse = cindyDay || day;
+        const cindyDuration = cindyToUse.cindy ? cindyToUse.cindy.durationSeconds : 1200;
+        const cindyScheme = cindyToUse.cindy ? cindyToUse.cindy.scheme : [
+          { id: 'cindyPullups', name: 'Pull-ups', reps: 5 },
+          { id: 'cindyPushups', name: 'Push-ups', reps: 10 },
+          { id: 'cindySquats', name: 'Air Squats', reps: 15 }
+        ];
+        const schemeStr = cindyScheme.map(s => `${s.reps} ${s.name}`).join(' · ');
+        cindyCard.innerHTML = `
+          <div class="backup-tag" style="color:var(--c-accent);">Conditioning</div>
+          <div class="backup-day-name">Cindy AMRAP</div>
+          <div class="backup-day-sub">${Math.round(cindyDuration / 60)}-min AMRAP: ${schemeStr}. Log your rounds.</div>
+          <button class="btn-primary" id="btn-backup-cindy">
+            <svg viewBox="0 0 24 24"><path d="M5 3 L5 21 L19 12 Z"/></svg>
+            Start Cindy
+          </button>
+        `;
+        overview.appendChild(cindyCard);
+        cindyCard.querySelector('#btn-backup-cindy').addEventListener('click', () => {
+          // Start Cindy workout with today's date
+          const cindyDayId = cindyDay ? cindyDay.id : dayId;
+          const cindyDayData = cindyDay || day;
+          active = {
+            date: todayStr(),
+            day: cindyDayId,
+            startedAt: Date.now(),
+            type: 'cindy',
+            phase: 'cindy-running',
+            cindyStartAt: Date.now(),
+            cindyDuration: cindyDayData.cindy ? cindyDayData.cindy.durationSeconds : cindyDuration,
+            rounds: 0,
+            partial: '',
+            completed: false,
+          };
+          saveActive();
+          startCindyTimer();
+          switchView('workout');
+          renderWorkout();
+        });
+      }
+
       // "Just rest" option
       const restCard = document.createElement('div');
       restCard.className = 'backup-rest-card neu-raised-sm';
@@ -960,7 +1008,53 @@ function openDayView(dayId) {
         showRestLogScreen();
       });
     } else if (isThursday) {
-      // All caught up — no missed days
+      // All caught up — no missed days, but still offer Cindy
+      const cindyDay2 = plan.days.find(d => d.type === 'cindy' || (d.cindy && d.cindy.scheme));
+      const restNoteMentionsCindy2 = (day.restNote || '').toLowerCase().includes('cindy');
+      if (cindyDay2 || restNoteMentionsCindy2) {
+        const cindyToUse2 = cindyDay2 || day;
+        const cindyDuration2 = cindyToUse2.cindy ? cindyToUse2.cindy.durationSeconds : 1200;
+        const cindyScheme2 = cindyToUse2.cindy ? cindyToUse2.cindy.scheme : [
+          { id: 'cindyPullups', name: 'Pull-ups', reps: 5 },
+          { id: 'cindyPushups', name: 'Push-ups', reps: 10 },
+          { id: 'cindySquats', name: 'Air Squats', reps: 15 }
+        ];
+        const schemeStr2 = cindyScheme2.map(s => `${s.reps} ${s.name}`).join(' · ');
+        const cindyCard2 = document.createElement('div');
+        cindyCard2.className = 'backup-rest-card neu-raised-sm';
+        cindyCard2.style.borderColor = 'rgba(79, 209, 199, 0.3)';
+        cindyCard2.innerHTML = `
+          <div class="backup-tag" style="color:var(--c-accent);">Conditioning</div>
+          <div class="backup-day-name">Cindy AMRAP</div>
+          <div class="backup-day-sub">${Math.round(cindyDuration2 / 60)}-min AMRAP: ${schemeStr2}. Log your rounds.</div>
+          <button class="btn-primary" id="btn-backup-cindy-caught">
+            <svg viewBox="0 0 24 24"><path d="M5 3 L5 21 L19 12 Z"/></svg>
+            Start Cindy
+          </button>
+        `;
+        overview.appendChild(cindyCard2);
+        cindyCard2.querySelector('#btn-backup-cindy-caught').addEventListener('click', () => {
+          const cindyDayId2 = cindyDay2 ? cindyDay2.id : dayId;
+          const cindyDayData2 = cindyDay2 || day;
+          active = {
+            date: todayStr(),
+            day: cindyDayId2,
+            startedAt: Date.now(),
+            type: 'cindy',
+            phase: 'cindy-running',
+            cindyStartAt: Date.now(),
+            cindyDuration: cindyDayData2.cindy ? cindyDayData2.cindy.durationSeconds : cindyDuration2,
+            rounds: 0,
+            partial: '',
+            completed: false,
+          };
+          saveActive();
+          startCindyTimer();
+          switchView('workout');
+          renderWorkout();
+        });
+      }
+
       const card = document.createElement('div');
       card.className = 'backup-all-caught-up';
       card.innerHTML = `
@@ -968,7 +1062,7 @@ function openDayView(dayId) {
           <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
         </div>
         <div class="title">All caught up this week</div>
-        <div class="sub">You've completed every training day. Take a well-earned rest.</div>
+        <div class="sub">You've completed every training day. Do Cindy or take a well-earned rest.</div>
         <button class="btn-primary" id="btn-backup-rest-caught">
           <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
           Log Recovery
