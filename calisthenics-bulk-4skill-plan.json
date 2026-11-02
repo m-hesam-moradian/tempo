@@ -1,0 +1,1060 @@
+{
+  "format": "tempo-workout-plan",
+  "version": 1,
+  "name": "Calisthenics Bulk + 4-Skill Mastery",
+  "description": "5-day split: Sat Push+Handstand, Sun Core+Manna, Tue Pull+OAPU, Wed Legs+Dragon Pistol, Thu Cindy or backup (catch up on missed skill day). Mon/Fri rest. Skill block first (3 sets), then hypertrophy main workout. Equipment: pull-up bar, 2×15kg dumbbells, resistance band (door anchor). User: 78kg, 175cm, 10 pull-ups, 30 push-ups, 30 squats. Goal: bulk + skill mastery.",
+  "days": [
+    {
+      "id": "saturday",
+      "day": "Saturday",
+      "workoutName": "Push + Handstand Skill",
+      "type": "strength",
+      "exercises": [
+        {
+          "id": "wristPrep",
+          "name": "Wrist Prep (warm-up, ongoing)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "Wrist rocks 2×15 + wrist push-up progressions. Non-negotiable tendon insurance for OAHSPU chain.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wrist+prep+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandPullapartsWarmup",
+          "name": "Band Pull-Aparts (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "15 reps per set. Rear delts + rotator cuff activation.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+pull-aparts+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "scapPushupsWarmup",
+          "name": "Scapular Push-Ups (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "10 reps per set. Protract + retract at bottom of push-up position.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=scapular+push-ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "oneArmHSPU",
+          "name": "One-Arm Handstand Push-Up Progression",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "skill",
+          "note": "Skill block — practice current stage, 3 quality sets, never to failure. Stop every set while form is clean.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Hollow Body Hold",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 2,
+              "name": "Frog Stand (Crow Pose)",
+              "requirement": 45,
+              "unit": "seconds"
+            },
+            {
+              "stage": 3,
+              "name": "Wall Walks",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Wall-Assisted Handstand Hold (back-to-wall)",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 5,
+              "name": "Chest-to-Wall Handstand Hold",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Toe Pulls & Heel Pulls",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Elevated Pike Push-Ups",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Wall-Assisted Handstand Push-Up",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "Freestanding Handstand Hold",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 10,
+              "name": "Freestanding Straddle Handstand Hold",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 11,
+              "name": "Deficit Wall Handstand Push-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 12,
+              "name": "Freestanding Handstand Push-Up",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 13,
+              "name": "Handstand Weight Shifts",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 14,
+              "name": "Wall-Assisted One-Arm Handstand",
+              "requirement": 20,
+              "unit": "seconds"
+            },
+            {
+              "stage": 15,
+              "name": "Freestanding Fingertip-Assisted Handstand",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 16,
+              "name": "Freestanding One-Arm Handstand",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 17,
+              "name": "One-Arm Handstand Shrugs",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 18,
+              "name": "Typewriter Handstand Push-Ups",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 19,
+              "name": "Assisted One-Arm Handstand Push-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 20,
+              "name": "One-Arm Handstand Push-Up Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 21,
+              "name": "The Full One-Arm Handstand Push-Up",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=one-arm+handstand+push-up+progression+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "elevatedPikePushups",
+          "name": "Elevated Pike Push-Ups",
+          "sets": 4,
+          "restSeconds": 150,
+          "type": "strength",
+          "note": "Feet on chair, head to floor between hands. 6–10 reps. At 4×10 → raise feet higher, then hands on dumbbells.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=elevated+pike+push+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "pseudoPlanchePushups",
+          "name": "Pseudo-Planche Push-Ups",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "Hands at ribs, lean forward. Progress the lean over weeks. 6–10 reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=pseudo+planche+push+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbOverheadPress",
+          "name": "DB Overhead Press (seated)",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "15kg each hand. 8–12 reps. At 3×12 → 3-sec descents → single-arm press.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=seated+dumbbell+overhead+press+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandLateralRaise",
+          "name": "Band Lateral Raise",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "note": "Superset with triceps pushdown. 15–20 reps. Full range, controlled.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+lateral+raise+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandTricepsPushdown",
+          "name": "Band Triceps Pushdown",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "strength",
+          "note": "Superset with lateral raise. 10–15 reps. Full lockout, slow return. Band anchored high on door.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+triceps+pushdown+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sunday",
+      "day": "Sunday",
+      "workoutName": "Core + Arms + Manna Skill",
+      "type": "strength",
+      "exercises": [
+        {
+          "id": "wristPrepSun",
+          "name": "Wrist Prep (warm-up, ongoing)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "Wrist rocks + wrist push-up progressions. Ongoing tendon insurance.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wrist+prep+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "deadHangWarmupSun",
+          "name": "Dead Hang (warm-up)",
+          "sets": 1,
+          "restSeconds": 30,
+          "type": "timed",
+          "note": "20-second hang. Grip activation.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dead+hang+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "hollowRocksWarmup",
+          "name": "Hollow Rocks (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "10 reps per set. Core activation.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=hollow+rocks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "manna",
+          "name": "Manna Progression",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "skill",
+          "note": "Skill block — practice current stage, 3 quality sets. Transition L-sit/V-sit work from parallettes to floor over time. Ongoing: seated pike compression lifts, shoulder-extension wall slides, progressive wrist-extension work.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Support Hold (Parallettes)",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 2,
+              "name": "Reverse Plank Hold",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 3,
+              "name": "Foot-Supported L-Sit",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 4,
+              "name": "One-Leg-Extended L-Sit",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 5,
+              "name": "Tuck L-Sit",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Full L-Sit",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 7,
+              "name": "Tuck V-Sit",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 8,
+              "name": "Full V-Sit",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 9,
+              "name": "High V-Sit (Pike Compression)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 10,
+              "name": "Seated Hip Lifts",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 11,
+              "name": "Hands-Back V-Sit Hold",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 12,
+              "name": "Straddle Manna Hip Slides",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 13,
+              "name": "Wall-Assisted Manna Slides (optional)",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 14,
+              "name": "Straddle or Tuck Manna",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 15,
+              "name": "The Full Manna",
+              "requirement": 5,
+              "unit": "seconds"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=manna+progression+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "hangingLegRaises",
+          "name": "Hanging Leg Raises",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "Knees to chest if straight legs fail. No swing. 8–12 reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=hanging+leg+raises+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "reversePlank",
+          "name": "Reverse Plank",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "timed",
+          "note": "Manna prep — chest up, glutes squeezed. 30–45 seconds.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=reverse+plank+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "copenhagenPlank",
+          "name": "Copenhagen Plank (short lever)",
+          "sets": 2,
+          "restSeconds": 60,
+          "type": "timed",
+          "note": "20–30s per side. Also builds adductor strength for Dragon Pistol chain.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=copenhagen+plank+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbBicepsCurl",
+          "name": "DB Biceps Curl",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "note": "Superset with band face pull. 15kg each. 8–12 reps, 3-sec lowering.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+biceps+curl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandFacePull",
+          "name": "Band Face Pull",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "note": "Superset with biceps curl. 15–20 reps. Rear delts — shoulder insurance against all the pressing. Band anchored high.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+face+pull+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "farmerHold",
+          "name": "Farmer Hold (2×15kg DBs)",
+          "sets": 2,
+          "restSeconds": 60,
+          "type": "timed",
+          "note": "30–45 seconds. Grip work feeding your One-Arm Pull-Up chain.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=farmer+hold+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monday",
+      "day": "Monday",
+      "workoutName": "Rest",
+      "type": "rest",
+      "exercises": [],
+      "restNote": "Full rest. Recovery is when adaptation happens. Sleep 7–9 hours."
+    },
+    {
+      "id": "tuesday",
+      "day": "Tuesday",
+      "workoutName": "Pull + One-Arm Pull-Up Skill",
+      "type": "strength",
+      "exercises": [
+        {
+          "id": "deadHangWarmupTue",
+          "name": "Dead Hang (warm-up)",
+          "sets": 1,
+          "restSeconds": 30,
+          "type": "timed",
+          "note": "30-second hang. Grip + shoulder activation.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dead+hang+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "scapPullsWarmup",
+          "name": "Scapular Pulls (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "6 reps per set. Depress scapula from dead hang.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=scapular+pulls+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandPullapartsTue",
+          "name": "Band Pull-Aparts (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "15 reps per set. Rear delts + rotator cuff.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+pull-aparts+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "oneArmPullup",
+          "name": "One-Arm Pull-Up Progression",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "skill",
+          "note": "Skill block — practice current stage, 3 quality sets. Once weighted pull-ups unlocked (stage 7), keep 1–2 weighted sessions per week for the rest of the chain.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Dead Hang",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 2,
+              "name": "Scapular Pulls",
+              "requirement": 15,
+              "unit": "reps"
+            },
+            {
+              "stage": 3,
+              "name": "Inverted Rows",
+              "requirement": 15,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Flex Hang (Top Position)",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 5,
+              "name": "Two-Arm Negatives",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 6,
+              "name": "Strict Two-Arm Pull-Ups",
+              "requirement": 20,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Weighted Pull-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Uneven Pull-Ups (Wrist/Forearm Grip)",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "Archer Pull-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 10,
+              "name": "Typewriter Pull-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 11,
+              "name": "One-Arm Lock-Offs",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 12,
+              "name": "One-Arm Dead Hang",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 13,
+              "name": "One-Arm Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 14,
+              "name": "Assisted One-Arm Pull-Ups (tiered)",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 15,
+              "name": "The Full One-Arm Pull-Up",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=one-arm+pull-up+progression+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "weightedPullups",
+          "name": "Weighted Pull-Ups",
+          "sets": 5,
+          "restSeconds": 180,
+          "type": "strength",
+          "note": "#1 strength driver. Backpack with 5–10kg books. 3–6 reps. Add ~2.5kg when you hit 5×6.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=weighted+pull+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bodyweightPullups",
+          "name": "Bodyweight Pull-Ups",
+          "sets": 2,
+          "restSeconds": 150,
+          "type": "strength",
+          "note": "AMRAP — stop 1 rep before failure. This builds your 15–20 rep base.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=pull+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "feetElevatedInvertedRows",
+          "name": "Feet-Elevated Inverted Rows",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "Body straight, chest to hands. 8–12 reps. Use bar or band anchored low.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=inverted+rows+feet+elevated+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandLatPulldown",
+          "name": "Band Lat Pulldown (kneeling, high anchor)",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "strength",
+          "note": "12–15 reps. Volume without frying grip. Band anchored high on door.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+lat+pulldown+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "maxDeadHangFinisher",
+          "name": "Max Dead Hang (finisher)",
+          "sets": 1,
+          "restSeconds": 0,
+          "type": "timed",
+          "note": "Optional. Hang until failure. Grip endurance.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=max+dead+hang+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wednesday",
+      "day": "Wednesday",
+      "workoutName": "Legs + Dragon Pistol Skill",
+      "type": "strength",
+      "exercises": [
+        {
+          "id": "ankleRocksWarmup",
+          "name": "Knee-to-Wall Ankle Rocks (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "10 reps per side. Ankle dorsiflexion mobility.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=knee-to-wall+ankle+rocks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bodyweightSquatsWarmup",
+          "name": "Bodyweight Squats (warm-up)",
+          "sets": 1,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "20 reps at full depth. Hip + knee activation.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=bodyweight+squats+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "gluteBridgesWarmup",
+          "name": "Glute Bridges (warm-up)",
+          "sets": 2,
+          "restSeconds": 30,
+          "type": "strength",
+          "note": "10 reps. Glute activation for leg day.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=glute+bridges+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dragonPistol",
+          "name": "Dragon Pistol Squat Progression",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "skill",
+          "note": "Skill block — practice current stage, 3 quality sets per leg. Ongoing: couch stretch/standing quad hold for wrapped rear leg; optional tibialis raises and ATG split squats for knee conditioning.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Deep Bodyweight Squat",
+              "requirement": 20,
+              "unit": "reps"
+            },
+            {
+              "stage": 2,
+              "name": "Ankle Dorsiflexion (Knee-to-Wall Test)",
+              "requirement": 4,
+              "unit": "inches"
+            },
+            {
+              "stage": 3,
+              "name": "Bulgarian Split Squats",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Box Pistol Squat",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 5,
+              "name": "Assisted Full Pistol",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 6,
+              "name": "Standard Pistol Squat",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Deep Cossack Squats",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Bottom-Position Pause Reps",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 9,
+              "name": "Skater Squat (Shrimp Squat)",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 10,
+              "name": "Standing Rear-Leg Wrap Hold",
+              "requirement": 20,
+              "unit": "seconds"
+            },
+            {
+              "stage": 11,
+              "name": "Elevated Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 12,
+              "name": "Assisted Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 13,
+              "name": "Dragon Pistol Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 14,
+              "name": "The Full Dragon Pistol Squat",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dragon+pistol+squat+progression+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbBulgarianSplitSquat",
+          "name": "DB Bulgarian Split Squat",
+          "sets": 4,
+          "restSeconds": 150,
+          "type": "strength",
+          "note": "15kg DBs at sides. 8–12 reps per leg. Front foot slightly elevated for depth.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+bulgarian+split+squat+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "singleLegDbRdl",
+          "name": "Single-Leg DB RDL",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "15kg per hand. 8–12 reps per leg. Slow tempo — replaces bilateral RDLs because 30kg total is too light for you.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=single+leg+dumbbell+rdl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbGobletSquat",
+          "name": "DB Goblet Squat",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "note": "1×15kg DB held at chest. 10–15 reps. 3-sec descent + 1-sec bottom pause.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+goblet+squat+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbStepUp",
+          "name": "DB Step-Up (chair/box)",
+          "sets": 2,
+          "restSeconds": 90,
+          "type": "strength",
+          "note": "15kg DBs. 10–12 reps per leg. Skip if pistol practice already fried you.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+step+up+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbCalfRaise",
+          "name": "DB Calf Raise",
+          "sets": 4,
+          "restSeconds": 60,
+          "type": "strength",
+          "note": "15kg DBs. 12–20 reps. 2-sec pause in the stretch — that's where growth is.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+calf+raise+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thursday",
+      "day": "Thursday",
+      "workoutName": "Cindy or Backup",
+      "type": "rest",
+      "exercises": [],
+      "durationSeconds": 1200,
+      "note": "Warm-up 5–10 min + 1 slow practice round. Cindy: 20-min AMRAP — 5 pull-ups, 10 push-ups, 15 squats. Log your score every week. If grip dies late, switch remaining rounds to 5 inverted rows — strict beats sloppy. Maintains conditioning and insulin sensitivity on a bulk.",
+      "cindy": {
+        "durationSeconds": 1200,
+        "scheme": [
+          {
+            "id": "cindyPullups",
+            "name": "Pull-ups",
+            "reps": 5,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=pull+ups+proper+form"
+              }
+            ]
+          },
+          {
+            "id": "cindyPushups",
+            "name": "Push-ups",
+            "reps": 10,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=push+ups+proper+form"
+              }
+            ]
+          },
+          {
+            "id": "cindySquats",
+            "name": "Air Squats",
+            "reps": 15,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=air+squats+proper+form"
+              }
+            ]
+          }
+        ]
+      },
+      "restNote": "If you missed any skill day this week (Sat/Sun/Tue/Wed), do it here. Otherwise, do Cindy: 20-min AMRAP — 5 pull-ups, 10 push-ups, 15 squats. Log your rounds."
+    },
+    {
+      "id": "friday",
+      "day": "Friday",
+      "workoutName": "Rest (always)",
+      "type": "rest",
+      "exercises": [],
+      "restNote": "Always free. No training, no guilt. Recovery is when adaptation actually happens."
+    }
+  ]
+}

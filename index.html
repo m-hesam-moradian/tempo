@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#1a242c" id="meta-theme-color">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TEMPO">
+<title>TEMPO — Workout Tracker</title>
+<!-- App icons (generated from Glossy TEMPO Kettlebell Fitness Icon) -->
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<!-- Web app manifest (local file) -->
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar" id="topbar" style="display:none;">
+    <div class="topbar-inner">
+      <div class="brand-mark">
+        <img src="icon-32.png" alt="TEMPO" class="brand-icon">
+        <span class="brand-name">TEMPO</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="btn-music-top" title="Music" aria-label="Music player">
+          <svg viewBox="0 0 24 24"><path d="M9 18 L9 6 L19 4 L19 16"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-video-top" title="Warmup / Cooldown Videos" aria-label="Video library">
+          <svg viewBox="0 0 24 24"><path d="M3 18 L8 12 L12 15 L16 9 L21 14"/><path d="M5 21 L19 21"/><circle cx="8" cy="6" r="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ WELCOME MODAL (popup over dashboard) ============ -->
+  <div class="welcome-modal" id="welcome-modal">
+    <div class="welcome-card">
+      <div class="welcome-logo">
+        <img src="icon-192.png" alt="TEMPO" class="welcome-logo-img">
+      </div>
+      <h1 class="welcome-title"><span class="accent">TEMPO</span></h1>
+      <p class="welcome-sub">Your workout. Your tempo. Set-by-set coaching, rest timers, history, music, and a fully editable plan — all stored locally on your device.</p>
+      <div class="welcome-form">
+        <input type="text" class="welcome-input" id="welcome-name" placeholder="Your name" maxlength="40" autocomplete="off">
+        <button class="btn-primary" id="btn-welcome-continue">
+          <svg viewBox="0 0 24 24"><path d="M5 12 L12 5"/><path d="M5 12 L12 19"/><path d="M5 12 L20 12"/></svg>
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME / DASHBOARD ============ -->
+  <section class="view" id="view-home">
+    <div class="dash-greeting">
+      <div class="greeting-time" id="greeting-time">GOOD MORNING</div>
+      <div class="greeting-name" id="greeting-name">—</div>
+      <div class="greeting-date" id="greeting-date">—</div>
+    </div>
+
+    <div id="resume-banner-host"></div>
+
+    <div class="today-card neu-raised" id="today-card">
+      <div class="today-label">Today's Workout</div>
+      <div class="today-name" id="today-name">—</div>
+      <div class="today-sub" id="today-sub">—</div>
+      <div class="today-stats">
+        <div class="today-stat">
+          <div class="today-stat-num" id="today-ex-count">0</div>
+          <div class="today-stat-label">Exercises</div>
+        </div>
+        <div class="today-stat">
+          <div class="today-stat-num" id="today-set-count">0</div>
+          <div class="today-stat-label">Sets</div>
+        </div>
+      </div>
+      <button class="btn-primary" id="btn-start-today">
+        <svg viewBox="0 0 24 24"><path d="M5 3 L5 21 L19 12 Z"/></svg>
+        Start Workout
+      </button>
+    </div>
+
+    <h3 class="section-title">Weekly Plan</h3>
+    <div class="week-list" id="week-list"></div>
+  </section>
+
+  <!-- ============ DAY OVERVIEW (before start) ============ -->
+  <section class="view" id="view-day">
+    <div class="workout-top-controls">
+      <button class="workout-back-btn" id="btn-day-back">
+        <svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>
+      </button>
+      <div class="day-page-num" style="font-family:'JetBrains Mono', monospace;font-size:11px;color:var(--c-text-faint);letter-spacing:0.18em;"></div>
+    </div>
+    <div class="day-hero">
+      <span class="day-hero-tag" id="day-hero-tag">—</span>
+      <h2 class="day-hero-title" id="day-hero-title">—</h2>
+      <div class="day-hero-sub" id="day-hero-sub">—</div>
+      <div class="day-hero-stats">
+        <div class="day-hero-stat">
+          <div class="day-hero-stat-num" id="day-hero-ex">0</div>
+          <div class="day-hero-stat-label">Exercises</div>
+        </div>
+        <div class="day-hero-stat">
+          <div class="day-hero-stat-num" id="day-hero-sets">0</div>
+          <div class="day-hero-stat-label">Sets</div>
+        </div>
+        <div class="day-hero-stat">
+          <div class="day-hero-stat-num" id="day-hero-rest">90s</div>
+          <div class="day-hero-stat-label">Avg Rest</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Exercises</h3>
+    <div class="exercise-overview" id="exercise-overview"></div>
+
+    <button class="btn-primary" id="btn-start-workout">
+      <svg viewBox="0 0 24 24"><path d="M5 3 L5 21 L19 12 Z"/></svg>
+      Start Workout
+    </button>
+  </section>
+
+  <!-- ============ ACTIVE WORKOUT ============ -->
+  <section class="view" id="view-workout">
+    <div class="workout-top-controls">
+      <button class="workout-back-btn" id="btn-workout-back">
+        <svg viewBox="0 0 24 24"><path d="M15 5 L8 12 L15 19"/></svg>
+      </button>
+      <button class="workout-pause-btn" id="btn-pause-workout">Pause</button>
+    </div>
+
+    <div class="workout-progress-bar">
+      <div class="workout-progress-fill" id="workout-progress-fill"></div>
+    </div>
+
+    <div class="workout-screen" id="workout-screen">
+      <!-- rendered dynamically -->
+    </div>
+  </section>
+
+  <!-- ============ COMPLETION ============ -->
+  <section class="view" id="view-completion">
+    <div class="completion-screen">
+      <div class="completion-check">
+        <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
+      </div>
+      <h2 class="completion-title">Workout Complete</h2>
+      <div class="completion-sub" id="completion-sub">—</div>
+      <div class="completion-stats" id="completion-stats"></div>
+      <button class="btn-primary" id="btn-completion-done">
+        <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
+        Done
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ HISTORY ============ -->
+  <section class="view" id="view-history">
+    <div class="dash-greeting">
+      <div class="greeting-time">YOUR JOURNEY</div>
+      <div class="greeting-name">History</div>
+      <div class="greeting-date" id="history-count">0 workouts logged</div>
+    </div>
+    <div class="history-list" id="history-list">
+      <div class="history-empty">No workouts yet. Start your first one from the Home tab.</div>
+    </div>
+  </section>
+
+  <!-- ============ PLAN EDITOR ============ -->
+  <section class="view" id="view-plan">
+    <div class="dash-greeting">
+      <div class="greeting-time">WORKOUT PLAN</div>
+      <div class="greeting-name">Edit & Share</div>
+      <div class="greeting-date" id="plan-name-display">—</div>
+    </div>
+
+    <div class="plan-day-tabs" id="plan-day-tabs"></div>
+
+    <div class="plan-edit-day-name">
+      <label class="plan-edit-label">Workout Name</label>
+      <input type="text" class="plan-edit-input" id="plan-edit-workout-name" maxlength="80">
+    </div>
+
+    <h3 class="section-title">Exercises</h3>
+    <div id="plan-exercise-list"></div>
+
+    <button class="btn-primary secondary" id="btn-plan-add-exercise" style="margin-bottom:18px;">
+      <svg viewBox="0 0 24 24"><path d="M12 5 L12 19"/><path d="M5 12 L19 12"/></svg>
+      Add Exercise
+    </button>
+
+    <button class="btn-primary" id="btn-plan-save" style="margin-bottom:18px;">
+      <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
+      Save Plan
+    </button>
+
+    <div class="plan-share-card neu-raised-sm" style="border:1px solid var(--c-accent-glow); margin-bottom:14px;">
+      <div class="plan-share-title" style="color:var(--c-accent-bright);">✨ Ask AI to Make a Plan</div>
+      <div class="plan-share-desc">Copy a ready-to-paste prompt that explains every TEMPO option to ChatGPT, Claude, or Gemini. The AI will reply with a valid JSON plan you can import here.</div>
+      <div class="plan-share-actions">
+        <button class="btn-primary" id="btn-ask-ai">
+          <svg viewBox="0 0 24 24"><path d="M9 18 L9 6 L19 4 L19 16"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+          Copy AI Prompt
+        </button>
+        <button class="btn-primary secondary" id="btn-download-template">
+          <svg viewBox="0 0 24 24"><path d="M12 3 L12 15"/><path d="M7 10 L12 15 L17 10"/><path d="M5 21 L19 21"/></svg>
+          Download Template
+        </button>
+      </div>
+    </div>
+
+    <div class="plan-share-card neu-raised-sm">
+      <div class="plan-share-title">Share Your Plan</div>
+      <div class="plan-share-desc">Download the workout plan as JSON to share with friends, or import someone else's plan. Your personal profile and history stay separate and are never included.</div>
+      <div class="plan-share-actions">
+        <button class="btn-primary secondary" id="btn-plan-download">
+          <svg viewBox="0 0 24 24"><path d="M12 3 L12 15"/><path d="M7 10 L12 15 L17 10"/><path d="M5 21 L19 21"/></svg>
+          Download Plan
+        </button>
+        <button class="btn-primary secondary" id="btn-plan-import">
+          <svg viewBox="0 0 24 24"><path d="M12 15 L12 3"/><path d="M7 8 L12 3 L17 8"/><path d="M5 21 L19 21"/></svg>
+          Import Plan
+        </button>
+        <button class="btn-primary secondary" id="btn-plan-paste">
+          <svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 5 L9 3 L15 3 L15 5"/><path d="M8 12 L11 15 L16 9"/></svg>
+          Paste JSON
+        </button>
+      </div>
+    </div>
+
+    <input type="file" class="hidden-file" id="file-plan-import" accept=".json,application/json">
+  </section>
+
+  <!-- ============ PROFILE ============ -->
+  <section class="view" id="view-profile">
+    <div class="dash-greeting">
+      <div class="greeting-time">ACCOUNT</div>
+      <div class="greeting-name">Profile</div>
+      <div class="greeting-date">Stored locally on this device</div>
+    </div>
+
+    <div class="profile-card neu-raised-sm">
+      <div class="profile-avatar" id="profile-avatar">—</div>
+      <div class="profile-info">
+        <div class="profile-name" id="profile-name">—</div>
+        <div class="profile-meta" id="profile-meta">—</div>
+      </div>
+      <button class="profile-edit-btn" id="btn-edit-name">Edit</button>
+    </div>
+
+    <div class="settings-card neu-raised-sm">
+      <div class="settings-row">
+        <div>
+          <div class="settings-row-label">Sound</div>
+          <div class="settings-row-sub">Beep when rest timer ends</div>
+        </div>
+        <button class="toggle-switch on" id="toggle-sound" aria-label="Toggle sound"></button>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row-label">Vibration</div>
+          <div class="settings-row-sub">Haptic feedback when rest ends</div>
+        </div>
+        <button class="toggle-switch on" id="toggle-vibrate" aria-label="Toggle vibration"></button>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row-label">Theme</div>
+          <div class="settings-row-sub">Dark / Light mode</div>
+        </div>
+        <button class="toggle-switch on" id="toggle-theme" aria-label="Toggle theme"></button>
+      </div>
+      <div class="settings-row" style="flex-direction:column; align-items:stretch; gap:10px;">
+        <div>
+          <div class="settings-row-label">Accent Color</div>
+          <div class="settings-row-sub">Pick your vibe</div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <button class="color-swatch" data-color="#4FD1C7" style="background:#4FD1C7;" aria-label="Cyan"></button>
+          <button class="color-swatch" data-color="#F6A623" style="background:#F6A623;" aria-label="Orange"></button>
+          <button class="color-swatch" data-color="#A78BFA" style="background:#A78BFA;" aria-label="Purple"></button>
+          <button class="color-swatch" data-color="#EF5350" style="background:#EF5350;" aria-label="Red"></button>
+          <button class="color-swatch" data-color="#34D399" style="background:#34D399;" aria-label="Green"></button>
+          <button class="color-swatch" data-color="#60A5FA" style="background:#60A5FA;" aria-label="Blue"></button>
+          <button class="color-swatch" data-color="#EC4899" style="background:#EC4899;" aria-label="Pink"></button>
+          <input type="color" id="custom-color" value="#4FD1C7" style="width:36px; height:36px; border:0; background:transparent; cursor:pointer; padding:0;" aria-label="Custom color">
+        </div>
+      </div>
+      <div class="settings-row" id="install-row" style="display:none;">
+        <div>
+          <div class="settings-row-label">Install App</div>
+          <div class="settings-row-sub">Add to home screen for full-screen use</div>
+        </div>
+        <button class="profile-edit-btn" id="btn-install-app" style="color:#0a141a; background:linear-gradient(145deg, var(--c-accent-bright), var(--c-accent)); box-shadow: 0 0 12px var(--c-accent-glow);">Install</button>
+      </div>
+    </div>
+
+    <div class="data-actions-card neu-raised-sm">
+      <button class="btn-primary" id="btn-export-all">
+        <svg viewBox="0 0 24 24"><path d="M12 3 L12 15"/><path d="M7 10 L12 15 L17 10"/><path d="M5 21 L19 21"/></svg>
+        Export All Data
+      </button>
+      <button class="btn-primary secondary" id="btn-import-all">
+        <svg viewBox="0 0 24 24"><path d="M12 15 L12 3"/><path d="M7 8 L12 3 L17 8"/><path d="M5 21 L19 21"/></svg>
+        Import All Data
+      </button>
+      <button class="btn-primary danger" id="btn-reset-app">
+        <svg viewBox="0 0 24 24"><path d="M4 7 L20 7"/><path d="M9 7 L9 4 L15 4 L15 7"/><path d="M6 7 L7 21 L17 21 L18 7"/><path d="M10 11 L10 17"/><path d="M14 11 L14 17"/></svg>
+        Reset Application
+      </button>
+      <input type="file" class="hidden-file" id="file-import-all" accept=".json,application/json">
+    </div>
+  </section>
+
+  <!-- ============ MEASUREMENTS ============ -->
+  <section class="view" id="view-measurements">
+    <div class="dash-greeting">
+      <div class="greeting-time">TRACK PROGRESS</div>
+      <div class="greeting-name">Measurements</div>
+      <div class="greeting-date">PRs, photos, body metrics</div>
+    </div>
+
+    <div class="measure-header neu-raised-sm">
+      <div class="measure-header-label">Display Unit</div>
+      <div class="measure-header-actions">
+        <button class="icon-btn measure-pr-btn" id="btn-open-prs" title="Performance PRs" aria-label="Show Performance PRs">
+          <svg viewBox="0 0 24 24"><path d="M8 21 L16 21"/><path d="M12 17 L12 21"/><path d="M7 4 L17 4 L17 11 C17 13.8 14.8 16 12 16 C9.2 16 7 13.8 7 11 Z"/><path d="M17 5 L20 6 L20 8 C20 10 18 11 17 10.5"/><path d="M7 5 L4 6 L4 8 C4 10 6 11 7 10.5"/></svg>
+        </button>
+        <button class="btn-primary secondary measure-unit-toggle" id="btn-measure-unit-toggle">
+          <svg viewBox="0 0 24 24"><path d="M4 7 L20 7"/><path d="M4 12 L20 12"/><path d="M4 17 L20 17"/></svg>
+          <span id="measure-unit-label">Metric · cm/kg</span>
+        </button>
+      </div>
+    </div>
+
+    <h3 class="section-title">Progress Photos</h3>
+    <div class="measure-photos-card neu-raised-sm">
+      <div class="measure-photos-actions">
+        <button class="btn-primary" id="btn-add-progress-photo">
+          <svg viewBox="0 0 24 24"><path d="M12 5 L12 19"/><path d="M5 12 L19 12"/></svg>
+          Upload Photo
+        </button>
+        <span class="measure-photos-hint" id="measure-photos-count">0 photos</span>
+      </div>
+      <div class="measure-photo-timeline" id="measure-photo-timeline">
+        <div class="measure-empty">No photos yet. Tap upload to add your first progress shot.</div>
+      </div>
+      <input type="file" class="hidden-file" id="file-progress-photo" accept="image/*">
+    </div>
+
+    <h3 class="section-title">Measurement Log</h3>
+    <div class="measure-entries-card neu-raised-sm">
+      <button class="btn-primary" id="btn-log-measurement">
+        <svg viewBox="0 0 24 24"><path d="M12 5 L12 19"/><path d="M5 12 L19 12"/></svg>
+        Log New Measurement
+      </button>
+      <div class="measure-entries-list" id="measure-entries-list">
+        <div class="measure-empty">No entries yet. Log your first measurement to start tracking.</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Template</h3>
+    <div class="measure-template-card neu-raised-sm">
+      <div class="measure-template-desc">Customize which fields appear in your measurement log. Export to share with friends, import to use someone else's template.</div>
+      <div class="measure-template-fields" id="measure-template-fields">
+        <div class="measure-empty">No template fields.</div>
+      </div>
+      <div class="measure-template-actions">
+        <button class="btn-primary secondary" id="btn-export-measure-template">
+          <svg viewBox="0 0 24 24"><path d="M12 3 L12 15"/><path d="M7 10 L12 15 L17 10"/><path d="M5 21 L19 21"/></svg>
+          Export Template
+        </button>
+        <button class="btn-primary secondary" id="btn-import-measure-template">
+          <svg viewBox="0 0 24 24"><path d="M12 15 L12 3"/><path d="M7 8 L12 3 L17 8"/><path d="M5 21 L19 21"/></svg>
+          Import Template
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="bottom-nav" id="bottom-nav" style="display:none;">
+  <button class="nav-tab" data-view="home">
+    <svg viewBox="0 0 24 24"><path d="M3 12 L12 3 L21 12"/><path d="M5 10 L5 21 L19 21 L19 10"/></svg>
+    <span class="nav-label">Home</span>
+  </button>
+  <button class="nav-tab" data-view="history">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7 L12 12 L15 14"/></svg>
+    <span class="nav-label">History</span>
+  </button>
+  <button class="nav-tab" data-view="plan">
+    <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9 L20 9"/><path d="M9 3 L9 7"/><path d="M15 3 L15 7"/></svg>
+    <span class="nav-label">Plan</span>
+  </button>
+  <button class="nav-tab" data-view="measurements">
+    <svg viewBox="0 0 24 24"><path d="M3 12 L7 12"/><path d="M17 12 L21 12"/><circle cx="12" cy="12" r="3"/><path d="M12 3 L12 7"/><path d="M12 17 L12 21"/></svg>
+    <span class="nav-label">Measure</span>
+  </button>
+  <button class="nav-tab" data-view="profile">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21 C4 16 8 14 12 14 C16 14 20 16 20 21"/></svg>
+    <span class="nav-label">Profile</span>
+  </button>
+</nav>
+
+<!-- ============ TOAST ============ -->
+<div class="toast" id="toast"><span id="toast-text">Saved</span></div>
+
+<!-- ============ MODAL (import preview / confirm) ============ -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal-sheet neu-raised" id="modal-sheet" role="dialog">
+    <div class="modal-handle"></div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ============ MUSIC PLAYER PANEL ============ -->
+<div class="music-panel" id="music-panel">
+  <div class="music-sheet neu-raised" role="dialog">
+    <div class="music-head">
+      <div class="music-head-info">
+        <div class="music-head-sub">Workout Music</div>
+        <div class="music-head-title">Hype Energy</div>
+      </div>
+      <button class="music-close-btn" id="btn-close-music" aria-label="Close music">×</button>
+    </div>
+
+    <div class="music-now-playing">
+      <div class="music-np-label">Now Playing</div>
+      <div class="music-np-title" id="music-np-title">No track selected</div>
+      <div class="music-controls">
+        <button class="music-ctrl-btn" id="btn-music-prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><path d="M19 5 L9 12 L19 19 Z" fill="currentColor" stroke="none"/><path d="M7 5 L7 19"/></svg>
+        </button>
+        <button class="music-ctrl-btn play" id="btn-music-play" aria-label="Play / Pause">
+          <svg id="music-play-icon" viewBox="0 0 24 24"><path d="M6 4 L20 12 L6 20 Z"/></svg>
+          <svg id="music-pause-icon" viewBox="0 0 24 24" style="display:none;"><rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none"/></svg>
+        </button>
+        <button class="music-ctrl-btn" id="btn-music-next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M5 5 L15 12 L5 19 Z" fill="currentColor" stroke="none"/><path d="M17 5 L17 19"/></svg>
+        </button>
+      </div>
+      <div class="music-video-toggle-row">
+        <button class="music-video-toggle" id="btn-toggle-video" aria-label="Video Off" aria-pressed="false">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 9 L21 7 L21 17 L17 15 Z"/></svg>
+          <span id="video-toggle-label">Show Video</span>
+        </button>
+        <span class="music-video-hint" id="video-hint">Video hidden · audio continues</span>
+      </div>
+    </div>
+
+    <div class="music-video-stage" id="music-video-stage">
+      <!-- YouTube player moves here when video is visible -->
+    </div>
+
+    <div class="music-track-list-wrap">
+      <div class="music-list-head">
+        <span class="music-list-title">Playlist</span>
+        <span class="music-list-count" id="music-list-count">0 tracks</span>
+      </div>
+      <div id="music-track-list">
+        <div class="music-empty">No tracks yet. Paste a YouTube link below to add your first track.</div>
+      </div>
+    </div>
+
+    <div class="music-add-row">
+      <div class="music-add-input-row">
+        <input type="url" class="music-add-input" id="music-add-input" placeholder="Paste YouTube URL" autocomplete="off">
+        <button class="music-add-btn" id="btn-music-add">Add</button>
+      </div>
+      <a class="music-discover-btn" href="https://www.youtube.com/results?search_query=gym+motivation+music+mix" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16 L21 21"/></svg>
+        Find gym music on YouTube
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Persistent YouTube iframe; positioned over the video stage when visible. -->
+<div id="yt-player-host"><div id="yt-player"></div></div>
+
+<!-- Mini now-playing bar (shown when music is playing during workout) -->
+<div class="music-mini-bar" id="music-mini-bar">
+  <button class="mini-icon" id="mini-play-toggle" aria-label="Pause music">
+    <svg id="mini-play-icon" viewBox="0 0 24 24"><path d="M6 4 L20 12 L6 20 Z"/></svg>
+    <svg id="mini-pause-icon" viewBox="0 0 24 24" style="display:none;"><rect x="6" y="4" width="4" height="16" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" fill="currentColor" stroke="none"/></svg>
+  </button>
+  <div class="mini-info">
+    <div class="mini-title" id="mini-title">—</div>
+    <div class="mini-sub" id="mini-status">Paused</div>
+  </div>
+  <button class="mini-close-btn" id="mini-close" aria-label="Stop music and close player">×</button>
+</div>
+
+<!-- ============ VIDEO LIBRARY PANEL (warmup / cooldown) ============ -->
+<div class="music-panel video-panel" id="video-panel">
+  <div class="music-sheet video-sheet neu-raised" role="dialog">
+    <div class="music-head">
+      <div class="music-head-info">
+        <div class="music-head-sub">Warmup · Cooldown</div>
+        <div class="music-head-title">Video Library</div>
+      </div>
+      <button class="music-close-btn" id="btn-close-video-panel" aria-label="Close video library">×</button>
+    </div>
+
+    <div class="video-category-tabs" id="video-category-tabs">
+      <button class="video-cat-tab active" data-cat="warmup">Warmup</button>
+      <button class="video-cat-tab" data-cat="cooldown">Cooldown</button>
+    </div>
+
+    <div class="music-track-list-wrap">
+      <div class="music-list-head">
+        <span class="music-list-title" id="video-list-title">Warmup Videos</span>
+        <span class="music-list-count" id="video-list-count">0 videos</span>
+      </div>
+      <div id="video-track-list">
+        <div class="music-empty">No videos yet. Add a title below and pick a video file.</div>
+      </div>
+    </div>
+
+    <div class="music-add-row">
+      <div class="music-add-input-row">
+        <input type="text" class="music-add-input" id="video-add-input" placeholder="Video title (e.g. Hip mobility)" autocomplete="off">
+        <button class="music-add-btn" id="btn-video-add">Add</button>
+      </div>
+      <div class="music-video-hint" style="text-align:center;">Pick a video file from your device · stored locally</div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden file input for adding videos -->
+<input type="file" class="hidden-file" id="file-video-add" accept="video/*">
+
+<!-- ============ FULL-SCREEN VIDEO PLAYER MODAL ============ -->
+<div class="video-player-modal" id="video-player-modal">
+  <button class="video-player-close" id="btn-close-video-player" aria-label="Close video">×</button>
+  <div class="video-player-wrap" id="video-player-wrap"></div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

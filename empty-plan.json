@@ -1,0 +1,60 @@
+{
+  "format": "tempo-workout-plan",
+  "version": 1,
+  "name": "",
+  "description": "",
+  "days": [
+    {
+      "id": "monday",
+      "day": "Monday",
+      "workoutName": "",
+      "type": "strength",
+      "exercises": []
+    },
+    {
+      "id": "tuesday",
+      "day": "Tuesday",
+      "workoutName": "",
+      "type": "strength",
+      "exercises": []
+    },
+    {
+      "id": "wednesday",
+      "day": "Wednesday",
+      "workoutName": "",
+      "type": "strength",
+      "exercises": []
+    },
+    {
+      "id": "thursday",
+      "day": "Thursday",
+      "workoutName": "",
+      "type": "rest",
+      "exercises": [],
+      "restNote": ""
+    },
+    {
+      "id": "friday",
+      "day": "Friday",
+      "workoutName": "",
+      "type": "rest",
+      "exercises": [],
+      "restNote": ""
+    },
+    {
+      "id": "saturday",
+      "day": "Saturday",
+      "workoutName": "",
+      "type": "strength",
+      "exercises": []
+    },
+    {
+      "id": "sunday",
+      "day": "Sunday",
+      "workoutName": "",
+      "type": "rest",
+      "exercises": [],
+      "restNote": ""
+    }
+  ]
+}
