@@ -1,0 +1,1754 @@
+{
+  "format": "tempo-workout-plan",
+  "version": 1,
+  "name": "Calisthenics Bulk + 4-Skill Mastery (v3)",
+  "description": "5-day split: Sat Push+Handstand, Sun Core+Arms+Manna, Tue Pull+OAPU, Wed Legs+Dragon Pistol (L/R), Thu Backup/Mobility/Cindy. Mon/Fri rest. Guided timed warmups & muscle-focused cooldowns separated from main workouts, completed skill stages trimmed, unilateral Left/Right tracking, no door-anchor dependencies, and Tempo Coach (secondsPerRep) synced to form cues. Equipment: pull-up bar, 2×15kg DBs, resistance band, floor.",
+  "days": [
+    {
+      "id": "saturday",
+      "day": "Saturday",
+      "workoutName": "Push + Handstand Skill",
+      "type": "strength",
+      "warmup": [
+        {
+          "id": "saturday-warmup-jumping-jacks",
+          "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Light continuous pace to raise heart rate and warm up joints.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=jumping+jacks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-warmup-arm-circles-wall-slides",
+          "name": "Arm Circles & Wall Slides",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "15s arm circles forward, 15s backward, 15s wall slides to open overhead shoulder mobility.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=arm+circles++wall+slides+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-warmup-wrist-prep-timed-flow",
+          "name": "Wrist Prep (Timed Flow)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 90,
+          "note": "Continuous flow on hands & knees with elbows locked straight: 30s rocks fingers forward, 20s rocks fingers sideways, 20s gentle rocks fingers backward, 20s palm lifts. Essential handstand & planche tendon insurance.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wrist+prep+timed+flow+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-warmup-band-pull-aparts-activation",
+          "name": "Band Pull-Aparts (Activation)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Smooth light reps for 30s. Keep shoulders down away from ears to wake up rear delts and rotator cuffs.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+pullaparts+activation+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-warmup-scapular-push-ups-activation",
+          "name": "Scapular Push-Ups (Activation)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Slow continuous protraction and retraction in plank position for 30s with elbows locked straight.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=scapular+pushups+activation+proper+form"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "id": "oneArmHSPU",
+          "name": "One-Arm Handstand Push-Up Progression",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "skill",
+          "secondsPerRep": 4,
+          "note": "Skill block — 3 clean sets, NEVER to failure. For holds: grip the floor with fingertips to control balance. For rep stages: Tempo 3-0-1-0 (4s/rep) — 3s controlled lower, 1s smooth press. Unlock the next stage only with clean form.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Frog Stand (Solid Hold)",
+              "requirement": 20,
+              "unit": "seconds"
+            },
+            {
+              "stage": 2,
+              "name": "High-Knee Crow Pose (Knees High on Triceps)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 3,
+              "name": "Wall Walks",
+              "requirement": 6,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Wall-Assisted Handstand (Back-to-Wall)",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 5,
+              "name": "Wall-Assisted Handstand (Back-to-Wall)",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Chest-to-Wall Handstand (Hands 30cm Out)",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 7,
+              "name": "Chest-to-Wall Handstand (Strict Line)",
+              "requirement": 60,
+              "unit": "seconds"
+            },
+            {
+              "stage": 8,
+              "name": "Toe Pulls & Heel Pulls (Balance Drills)",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "Elevated Pike Push-Ups (Feet on Chair)",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 10,
+              "name": "Wall-Assisted HSPU (Half-ROM / Cushion)",
+              "requirement": 6,
+              "unit": "reps"
+            },
+            {
+              "stage": 11,
+              "name": "Wall-Assisted Full HSPU",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 12,
+              "name": "Freestanding Handstand Hold",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 13,
+              "name": "Freestanding Handstand Hold",
+              "requirement": 45,
+              "unit": "seconds"
+            },
+            {
+              "stage": 14,
+              "name": "Freestanding Straddle Handstand Hold",
+              "requirement": 25,
+              "unit": "seconds"
+            },
+            {
+              "stage": 15,
+              "name": "Deficit Wall HSPU (Hands on DBs)",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 16,
+              "name": "Freestanding Handstand Push-Up",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 17,
+              "name": "Handstand Weight Shifts",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 18,
+              "name": "Wall-Assisted One-Arm Handstand",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 19,
+              "name": "Freestanding Fingertip-Assisted Handstand",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 20,
+              "name": "Freestanding One-Arm Handstand",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 21,
+              "name": "One-Arm Handstand Shrugs",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 22,
+              "name": "Typewriter Handstand Push-Ups",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 23,
+              "name": "Assisted One-Arm Handstand Push-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 24,
+              "name": "One-Arm Handstand Push-Up Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 25,
+              "name": "The Full One-Arm Handstand Push-Up",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=onearm+handstand+pushup+progression+proper+form"
+            }
+          ],
+          "prepSeconds": 10
+        },
+        {
+          "id": "elevatedPikePushups",
+          "name": "Elevated Pike Push-Ups",
+          "sets": 4,
+          "restSeconds": 150,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow lower, 1s strong press up. Feet on chair, shift forward so your forehead touches IN FRONT of your hands (triangle shape), elbows tucked 45°. Target 6–10 reps. At 4×10, elevate feet higher or put hands on DBs for deeper range.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=elevated+pike+push+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "pseudoPlanchePushups",
+          "name": "Pseudo-Planche Push-Ups",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow lower, 1s strong push, protract shoulders at top. Turn fingers 45° outward, place hands near lower ribs, squeeze glutes, and keep shoulders leaned past wrists the entire rep. Target 6–10 reps. At 3×10, lean 2cm further forward.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=pseudo+planche+push+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandLateralRaise",
+          "name": "Band Lateral Raise",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "secondsPerRep": 3,
+          "note": "Tempo 2-0-1-0 (3s/rep): 1s smooth lift to shoulder height, 2s controlled lower. Stand on the band (no door anchor needed), slight bend in elbows, lead with pinkies slightly down. Target 15–20 reps. Increase tension by stepping wider on the band.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+lateral+raise+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbOverheadTricepsExt",
+          "name": "DB Overhead Triceps Extension (1×15kg)",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow lower behind head into a deep triceps stretch, 1s full lockout. Hold one 15kg DB with both hands, keep elbows pointed forward and ribs tucked down. Target 8–15 reps. At 3×15, add a 1s pause in the bottom stretch.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=two+hand+dumbbell+overhead+triceps+extension+proper+form"
+            }
+          ]
+        }
+      ],
+      "cooldown": [
+        {
+          "id": "saturday-cooldown-doorway-chest-stretch",
+          "name": "Doorway Chest Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left side, 30s Right side. Forearm on doorway, step gently forward to open chest and front delts.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=doorway+chest+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-cooldown-overhead-triceps-stretch",
+          "name": "Overhead Triceps Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left arm, 30s Right arm. Reach hand down middle of upper back, gently guide elbow with opposite hand.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=overhead+triceps+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-cooldown-cross-body-shoulder-stretch",
+          "name": "Cross-Body Shoulder Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left arm, 30s Right arm. Pull straight arm across chest while keeping shoulder relaxed away from ear.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=crossbody+shoulder+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "saturday-cooldown-wrist-relief-forearm-stretch",
+          "name": "Wrist Relief & Forearm Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s palms down (fingers toward knees, gentle lean back), 30s backs of hands gently on floor. Slow deep breaths.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wrist+relief++forearm+stretch+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sunday",
+      "day": "Sunday",
+      "workoutName": "Core + Arms + Manna Skill",
+      "type": "strength",
+      "warmup": [
+        {
+          "id": "sunday-warmup-jumping-jacks",
+          "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Light cardio to get warm before core and compression work.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=jumping+jacks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-warmup-cat-cow-torso-twists",
+          "name": "Cat-Cow & Torso Twists",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s slow cat-cow spinal mobility, 30s standing torso twists.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=catcow++torso+twists+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-warmup-wrist-prep-manna-focus",
+          "name": "Wrist Prep (Manna Focus)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 90,
+          "note": "Continuous flow with elbows locked straight: 30s rocks fingers forward, 20s fingers sideways, 40s fingers pointing backward with gentle lean back to prep for L-sit, V-sit, and Manna.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wrist+prep+manna+focus+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-warmup-dead-hang-grip-activation",
+          "name": "Dead Hang (Grip Activation)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Relaxed hang on bar to decompress spine and wake up grip.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dead+hang+grip+activation+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-warmup-hollow-rocks-core-activation",
+          "name": "Hollow Rocks (Core Activation)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Gentle continuous hollow rocks for 30s. Glue lower back flat to floor—bend knees slightly if it arches.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=hollow+rocks+core+activation+proper+form"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "id": "manna",
+          "name": "Manna Progression",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "skill",
+          "secondsPerRep": 3,
+          "note": "Skill block — 3 quality sets, stop before form breaks. Push shoulders HARD down away from ears (scapular depression) and lock elbows completely. For rep stages (compression lifts/hip lifts): Tempo 1-1-1 (3s/rep) with a 1s squeeze at the peak.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Foot-Supported L-Sit",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 2,
+              "name": "One-Leg-Extended L-Sit (Hold Each Side)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 3,
+              "name": "Seated Pike Compression Lifts",
+              "requirement": 12,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Tuck L-Sit (Beginner Hold)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 5,
+              "name": "Tuck L-Sit (Solid Hold)",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Full L-Sit (Beginner Hold)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 7,
+              "name": "Full L-Sit (Solid Hold)",
+              "requirement": 30,
+              "unit": "seconds"
+            },
+            {
+              "stage": 8,
+              "name": "Tuck V-Sit",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 9,
+              "name": "Full V-Sit",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 10,
+              "name": "High V-Sit (Pike Compression)",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 11,
+              "name": "Seated Hip Lifts",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 12,
+              "name": "Hands-Back V-Sit Hold",
+              "requirement": 15,
+              "unit": "seconds"
+            },
+            {
+              "stage": 13,
+              "name": "Straddle Manna Hip Slides",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 14,
+              "name": "Wall-Assisted Manna Slides",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 15,
+              "name": "Straddle or Tuck Manna",
+              "requirement": 8,
+              "unit": "seconds"
+            },
+            {
+              "stage": 16,
+              "name": "The Full Manna",
+              "requirement": 5,
+              "unit": "seconds"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=manna+progression+proper+form"
+            }
+          ],
+          "prepSeconds": 10
+        },
+        {
+          "id": "hangingLegRaises",
+          "name": "Hanging Leg Raises",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s curl pelvis & legs up, 3s slow controlled lower with ZERO swinging. Target 8–12 reps. Tuck knees if straight legs lose control; curl tailbone up at top to truly hit abs.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=hanging+leg+raises+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "reversePlank",
+          "name": "Reverse Plank",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "timed",
+          "note": "Hold 30–45s. Fingers pointing back (if wrists allow) or sideways. Drive chest up, squeeze glutes hard, and pull shoulders back—directly opens shoulder extension for Manna.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=reverse+plank+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "copenhagenPlankLeft",
+          "name": "Copenhagen Plank (Left)",
+          "sets": 2,
+          "restSeconds": 45,
+          "type": "timed",
+          "note": "Weaker side first — 20–30s hold. Top knee/shin on a sturdy chair, hips lifted straight in one line. Builds groin/adductor stability for Dragon Pistol. Start short-lever (knee on chair) before progressing to ankle.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=copenhagen+plank+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "copenhagenPlankRight",
+          "name": "Copenhagen Plank (Right)",
+          "sets": 2,
+          "restSeconds": 60,
+          "type": "timed",
+          "note": "Match your Left side time (20–30s). Keep ribs stacked over hips and don't let the bottom hip sag.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=copenhagen+plank+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbBicepsCurlLeft",
+          "name": "Single-Arm DB Biceps Curl (Left, 15kg)",
+          "sets": 3,
+          "restSeconds": 45,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s strict curl up, 3s slow lowering to full elbow extension. Pin elbow to your side, zero body swing. Target 6–10 reps. If 15kg is too heavy for strict supinated curls, use neutral Hammer grip.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=single+arm+dumbbell+biceps+curl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbBicepsCurlRight",
+          "name": "Single-Arm DB Biceps Curl (Right, 15kg)",
+          "sets": 3,
+          "restSeconds": 75,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s strict curl up, 3s slow lowering. Match the exact rep count you got on your Left arm so imbalances stay fixed.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=single+arm+dumbbell+biceps+curl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "bandRearDeltPullAparts",
+          "name": "Slow Band Pull-Aparts (Rear Delts)",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "secondsPerRep": 3,
+          "note": "Tempo 1-1-1 (3s/rep): 1s pull band to collarbone, 1s hard shoulder-blade squeeze, 1s slow return. No door anchor needed. Target 15–20 reps. Essential shoulder insurance against heavy pushing.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+pull+aparts+rear+delts+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "farmerHold",
+          "name": "Farmer Hold (2×15kg DBs)",
+          "sets": 2,
+          "restSeconds": 60,
+          "type": "timed",
+          "note": "Hold 40–60s standing tall, shoulders pulled back and down. Crush the handles hard—builds forearm and grip strength for your One-Arm Pull-Up chain.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=farmer+hold+proper+form"
+            }
+          ]
+        }
+      ],
+      "cooldown": [
+        {
+          "id": "sunday-cooldown-cobra-stretch-abs",
+          "name": "Cobra Stretch (Abs)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Press hips into floor, lift chest gently, take slow breaths into your stretched abs.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=cobra+stretch+abs+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-cooldown-child-s-pose",
+          "name": "Child's Pose",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Reach arms far forward, sink hips back onto heels, relax lower back and shoulders.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=childs+pose+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-cooldown-wall-biceps-shoulder-extension-stretch",
+          "name": "Wall Biceps & Shoulder Extension Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left arm, 30s Right arm. Palm flat on wall behind you, gently turn chest away. Directly feeds Manna shoulder extension.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wall+biceps++shoulder+extension+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "sunday-cooldown-seated-forward-fold-pike",
+          "name": "Seated Forward Fold (Pike)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "Legs straight, hinge from hips toward toes with a flat back. Builds the pike flexibility needed for V-sit and Manna.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=seated+forward+fold+pike+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monday",
+      "day": "Monday",
+      "workoutName": "Rest",
+      "type": "rest",
+      "exercises": [],
+      "restNote": "Full rest. Muscle and tendons actually grow while you recover. Eat your lean bulk calories and aim for 7–9 hours of sleep."
+    },
+    {
+      "id": "tuesday",
+      "day": "Tuesday",
+      "workoutName": "Pull + One-Arm Pull-Up Skill",
+      "type": "strength",
+      "warmup": [
+        {
+          "id": "tuesday-warmup-jumping-jacks",
+          "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Raise heart rate and get blood flowing to upper back and arms.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=jumping+jacks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-warmup-arm-circles-scapular-circles",
+          "name": "Arm Circles & Scapular Circles",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s large arm circles (15s forward, 15s back), 30s slow shoulder-blade circles.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=arm+circles++scapular+circles+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-warmup-dead-hang-grip-lat-prep",
+          "name": "Dead Hang (Grip & Lat Prep)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Controlled hang on pull-up bar to stretch lats and wake up grip.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dead+hang+grip++lat+prep+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-warmup-scapular-pulls-activation",
+          "name": "Scapular Pulls (Activation)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Slow continuous scapular depressions from a dead hang for 30s. Keep elbows locked completely straight.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=scapular+pulls+activation+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-warmup-band-pull-aparts-rotator-cuff",
+          "name": "Band Pull-Aparts (Rotator Cuff)",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 30,
+          "note": "Smooth light reps for 30s to warm up rear delts and upper back.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=band+pullaparts+rotator+cuff+proper+form"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "id": "oneArmPullup",
+          "name": "One-Arm Pull-Up Progression",
+          "sets": 3,
+          "restSeconds": 150,
+          "type": "skill",
+          "secondsPerRep": 4,
+          "note": "Skill block — 3 high-quality sets, stop 1–2 reps before failure. Start every rep from a full dead hang (straight arms), pull cleanly with zero kipping. For rep stages: Tempo 3-0-1-0 (4s/rep) — 1s strong pull, 3s controlled lower. Listen to your elbows; stop immediately if you feel inner-elbow pain.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Strict Bodyweight Pull-Ups",
+              "requirement": 13,
+              "unit": "reps"
+            },
+            {
+              "stage": 2,
+              "name": "Strict Bodyweight Pull-Ups",
+              "requirement": 15,
+              "unit": "reps"
+            },
+            {
+              "stage": 3,
+              "name": "Chest-to-Bar Pull-Ups",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 4,
+              "name": "Slow-Tempo Pull-Ups (3s Negative)",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 5,
+              "name": "L-Sit Pull-Ups",
+              "requirement": 6,
+              "unit": "reps"
+            },
+            {
+              "stage": 6,
+              "name": "Strict Bodyweight Pull-Ups",
+              "requirement": 18,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Strict Bodyweight Pull-Ups",
+              "requirement": 20,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Close-Grip / Commando Pull-Ups",
+              "requirement": 8,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "Weighted Pull-Ups (+15kg DB Between Ankles)",
+              "requirement": 4,
+              "unit": "reps"
+            },
+            {
+              "stage": 10,
+              "name": "Uneven Pull-Ups (Hand on Wrist/Forearm)",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 11,
+              "name": "Archer Pull-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 12,
+              "name": "Typewriter Pull-Ups",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 13,
+              "name": "One-Arm Top Lock-Off",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 14,
+              "name": "One-Arm Dead Hang",
+              "requirement": 25,
+              "unit": "seconds"
+            },
+            {
+              "stage": 15,
+              "name": "One-Arm Negatives (5s Lower)",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 16,
+              "name": "Band-Assisted One-Arm Pull-Ups",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 17,
+              "name": "The Full One-Arm Pull-Up",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=onearm+pullup+progression+proper+form"
+            }
+          ],
+          "prepSeconds": 10
+        },
+        {
+          "id": "pauseSlowPullups",
+          "name": "Pause & Slow-Negative Pull-Ups",
+          "sets": 4,
+          "restSeconds": 180,
+          "type": "strength",
+          "secondsPerRep": 5,
+          "note": "Tempo 3-0-1-1 (5s/rep): 1s explosive pull up, 1s hard pause with chin/chest at bar, 3s slow negative to dead hang. Replaces weighted pull-ups! Target 4–6 reps. When 4×6 feels clean, extend legs into an L-sit or pinch one 15kg DB between your ankles.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=paused+slow+negative+pull+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "oneArmDbRowLeft",
+          "name": "One-Arm DB Row (Left, 15kg)",
+          "sets": 3,
+          "restSeconds": 45,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s drive elbow back toward your hip (not your shoulder), 3s slow lower into a deep lat stretch. Brace right hand on a chair/bed, flat back. Target 10–15 reps. At 3×15, add a 1s squeeze at the top.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=one+arm+dumbbell+row+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "oneArmDbRowRight",
+          "name": "One-Arm DB Row (Right, 15kg)",
+          "sets": 3,
+          "restSeconds": 90,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s pull toward hip, 3s slow stretch lower. Match your exact Left side rep count.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=one+arm+dumbbell+row+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "strictChinUps",
+          "name": "Strict Chin-Ups (Underhand)",
+          "sets": 2,
+          "restSeconds": 150,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 1s pull chest toward bar, 3s controlled lower. Shoulder-width palms facing you. Stop 1–2 reps before failure (target 6–10 reps). Builds massive biceps and pulling base without wrecking your elbows.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=strict+chin+ups+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "maxDeadHangFinisher",
+          "name": "Max Dead Hang (Finisher)",
+          "sets": 1,
+          "restSeconds": 0,
+          "type": "timed",
+          "note": "Optional. Hang until grip gives out. Keep shoulders slightly active rather than completely collapsed.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=max+dead+hang+proper+form"
+            }
+          ]
+        }
+      ],
+      "cooldown": [
+        {
+          "id": "tuesday-cooldown-overhead-lat-stretch",
+          "name": "Overhead Lat Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left side, 30s Right side. Hold door frame or bar overhead, sink hips away to stretch tight lats.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=overhead+lat+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-cooldown-wall-biceps-stretch",
+          "name": "Wall Biceps Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left arm, 30s Right arm. Palm flat on wall behind you, gently turn chest away to release elbow flexors.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wall+biceps+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-cooldown-gentle-neck-side-stretch",
+          "name": "Gentle Neck Side Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left side, 30s Right side. Tilt ear toward shoulder and drop opposite shoulder down to release upper traps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=gentle+neck+side+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "tuesday-cooldown-forearm-grip-flexor-stretch",
+          "name": "Forearm & Grip Flexor Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left arm, 30s Right arm. Extend arm forward palm up, gently pull fingers back. Key Golfer's elbow prevention.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=forearm++grip+flexor+stretch+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wednesday",
+      "day": "Wednesday",
+      "workoutName": "Legs + Dragon Pistol Skill",
+      "type": "strength",
+      "warmup": [
+        {
+          "id": "wednesday-warmup-jumping-jacks",
+          "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Warm up lower body and raise heart rate.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=jumping+jacks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-warmup-leg-swings-hip-circles",
+          "name": "Leg Swings & Hip Circles",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "15s front-to-back swings per leg, 15s side-to-side swings per leg, then smooth hip circles.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=leg+swings++hip+circles+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-warmup-knee-to-wall-ankle-rocks",
+          "name": "Knee-to-Wall Ankle Rocks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left ankle, 30s Right ankle. Smoothly drive knee past toes while keeping your heel glued to the floor—crucial for Dragon Pistol depth.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=kneetowall+ankle+rocks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-warmup-bodyweight-squats-glute-bridges",
+          "name": "Bodyweight Squats & Glute Bridges",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s slow full-depth bodyweight squats to grease hips/knees, 30s glute bridges squeezing hard at top.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=bodyweight+squats++glute+bridges+proper+form"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "id": "dragonPistolLeft",
+          "name": "Dragon Pistol Progression (Left)",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "skill",
+          "secondsPerRep": 4,
+          "note": "Weaker leg first — 3 quality sets. For rep stages: Tempo 3-0-1-0 (4s/rep) — 3s controlled descent, 1s strong stand. Keep knee tracking over middle toes and heel planted. Stop if you feel sharp lateral knee pain.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Standard Pistol Squat (Mastery)",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 2,
+              "name": "Deep Cossack Squat",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 3,
+              "name": "Bottom Pistol Pause Hold",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 4,
+              "name": "Shrimp (Skater) Squat",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 5,
+              "name": "Standing Rear-Leg Wrap Hold",
+              "requirement": 20,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Elevated Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Assisted Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Dragon Pistol Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "The Full Dragon Pistol Squat",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dragon+pistol+progression+left+proper+form"
+            }
+          ],
+          "prepSeconds": 10
+        },
+        {
+          "id": "dragonPistolRight",
+          "name": "Dragon Pistol Progression (Right)",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "skill",
+          "secondsPerRep": 4,
+          "note": "Right leg independent tracking — 3 quality sets. Tempo 3-0-1-0 (4s/rep) on rep stages. Keep heel glued down and descend under full control.",
+          "progression": [
+            {
+              "stage": 1,
+              "name": "Standard Pistol Squat (Mastery)",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 2,
+              "name": "Deep Cossack Squat",
+              "requirement": 10,
+              "unit": "reps"
+            },
+            {
+              "stage": 3,
+              "name": "Bottom Pistol Pause Hold",
+              "requirement": 10,
+              "unit": "seconds"
+            },
+            {
+              "stage": 4,
+              "name": "Shrimp (Skater) Squat",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 5,
+              "name": "Standing Rear-Leg Wrap Hold",
+              "requirement": 20,
+              "unit": "seconds"
+            },
+            {
+              "stage": 6,
+              "name": "Elevated Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 7,
+              "name": "Assisted Dragon Pistol",
+              "requirement": 5,
+              "unit": "reps"
+            },
+            {
+              "stage": 8,
+              "name": "Dragon Pistol Negatives",
+              "requirement": 3,
+              "unit": "reps"
+            },
+            {
+              "stage": 9,
+              "name": "The Full Dragon Pistol Squat",
+              "requirement": 1,
+              "unit": "reps"
+            }
+          ],
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dragon+pistol+progression+right+proper+form"
+            }
+          ],
+          "prepSeconds": 10
+        },
+        {
+          "id": "dbBulgarianSplitSquatLeft",
+          "name": "DB Bulgarian Split Squat (Left, 2×15kg)",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow descent until back knee nearly kisses floor, 1s drive through front foot. Slight forward torso lean for glutes + quads. Target 8–12 reps. At 3×12, elevate front foot 5cm for extra depth.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+bulgarian+split+squat+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbBulgarianSplitSquatRight",
+          "name": "DB Bulgarian Split Squat (Right, 2×15kg)",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow lower, 1s strong stand. Match the exact rep count from your Left leg.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=dumbbell+bulgarian+split+squat+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "singleLegDbRdlLeft",
+          "name": "Single-Leg DB RDL (Left, 2×15kg)",
+          "sets": 3,
+          "restSeconds": 60,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow hip hinge pushing hips backward, 1s squeeze glutes to stand. Keep standing knee slightly soft, back flat, and DBs shaving close to your shin. Target 8–12 reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=single+leg+dumbbell+rdl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "singleLegDbRdlRight",
+          "name": "Single-Leg DB RDL (Right, 2×15kg)",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 3-0-1-0 (4s/rep): 3s slow hinge into deep hamstring stretch, 1s glute squeeze up. Match your Left leg reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=single+leg+dumbbell+rdl+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "heelElevatedDbSquat",
+          "name": "Heel-Elevated DB Squat (2×15kg)",
+          "sets": 3,
+          "restSeconds": 120,
+          "type": "strength",
+          "secondsPerRep": 5,
+          "note": "Tempo 3-1-1-0 (5s/rep): 3s slow descent, 1s dead-stop pause at rock bottom, 1s strong drive up. Put heels on thick books/plates, hold both 15kg DBs at sides (30kg total), stay upright to hammer quads. Target 10–15 reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=heel+elevated+dumbbell+squat+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "dbCalfRaise",
+          "name": "DB Calf Raise (2×15kg)",
+          "sets": 4,
+          "restSeconds": 60,
+          "type": "strength",
+          "secondsPerRep": 4,
+          "note": "Tempo 1-2-1-0 (4s/rep): 1s full rise onto big toe, 1s slow lower off a step/book, 2s DEAD PAUSE in the bottom stretch (no bouncing—that stretch is where calves grow). Target 12–20 reps.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=standing+dumbbell+calf+raise+proper+form"
+            }
+          ]
+        }
+      ],
+      "cooldown": [
+        {
+          "id": "wednesday-cooldown-couch-standing-quad-stretch",
+          "name": "Couch / Standing Quad Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left leg, 30s Right leg. Squeeze glute and tuck pelvis—directly builds rear-leg quad flexibility for Dragon Pistol.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=couch++standing+quad+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-cooldown-hamstring-stretch",
+          "name": "Hamstring Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left leg, 30s Right leg. Hinge forward with a flat back and breathe deeply into the stretch.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=hamstring+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-cooldown-figure-4-pigeon-glute-stretch",
+          "name": "Figure-4 / Pigeon Glute Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left side, 30s Right side. Releases deep glutes and external hip rotators.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=figure4++pigeon+glute+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "wednesday-cooldown-wall-calf-ankle-stretch",
+          "name": "Wall Calf & Ankle Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left leg, 30s Right leg (15s straight knee for upper calf, 15s bent knee for soleus & ankle mobility).",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=wall+calf++ankle+stretch+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thursday",
+      "day": "Thursday",
+      "workoutName": "Cindy 20-min AMRAP (or Backup Mobility)",
+      "type": "cindy",
+      "durationSeconds": 1200,
+      "note": "Priority 1: catch up on any missed skill day (Sat/Sun/Tue/Wed). Priority 2: 15-20 min pancake/pike/shoulder mobility to accelerate Manna & Dragon Pistol. Priority 3 (only if 100% fresh): 20-min Cindy AMRAP below - 5 pull-ups, 10 push-ups, 15 air squats per round.",
+      "warmup": [
+        {
+          "id": "thursday-warmup-jumping-jacks",
+          "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Light cardio to get warm before Cindy or mobility work.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=jumping+jacks+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "thursday-warmup-air-squats",
+          "name": "Air Squats",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Smooth full-depth bodyweight squats to grease hips and knees.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=air+squats+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "thursday-warmup-plank-shoulder-taps",
+          "name": "Plank Shoulder Taps",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Core and shoulder stability prep; keep hips steady without rocking.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=plank+shoulder+taps+proper+form"
+            }
+          ]
+        }
+      ],
+      "exercises": [],
+      "cindy": {
+        "durationSeconds": 1200,
+        "scheme": [
+          {
+            "id": "cindyPullups",
+            "name": "Pull-ups",
+            "reps": 5,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=pullups+proper+form"
+              }
+            ]
+          },
+          {
+            "id": "cindyPushups",
+            "name": "Push-ups",
+            "reps": 10,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=pushups+proper+form"
+              }
+            ]
+          },
+          {
+            "id": "cindySquats",
+            "name": "Air Squats",
+            "reps": 15,
+            "mediaLinks": [
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/results?search_query=air+squats+proper+form"
+              }
+            ]
+          }
+        ]
+      },
+      "cooldown": [
+        {
+          "id": "thursday-cooldown-downward-dog",
+          "name": "Downward Dog",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Press heels gently toward floor and push chest through shoulders.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=downward+dog+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "thursday-cooldown-doorway-chest-stretch",
+          "name": "Doorway Chest Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left side, 30s Right side to open chest after push-ups.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=doorway+chest+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "thursday-cooldown-standing-quad-stretch",
+          "name": "Standing Quad Stretch",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 60,
+          "note": "30s Left leg, 30s Right leg to relax quads after squats.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=standing+quad+stretch+proper+form"
+            }
+          ]
+        },
+        {
+          "id": "thursday-cooldown-deep-squat-hold",
+          "name": "Deep Squat Hold",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
+          "durationSec": 45,
+          "note": "Relax at the bottom of a deep squat, gently pressing knees out with elbows to open hips and ankles.",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/results?search_query=deep+squat+hold+proper+form"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "friday",
+      "day": "Friday",
+      "workoutName": "Rest (Always)",
+      "type": "rest",
+      "exercises": [],
+      "restNote": "Always free. No training, no guilt. Recovery is when your nervous system and tendons adapt so Saturday feels strong."
+    }
+  ]
+}
