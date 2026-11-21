@@ -4815,14 +4815,16 @@ function togglePauseWorkout() {
   if (active.phase === 'warmup' || active.phase === 'cooldown') migrateLegacyWc();
   if (active.paused) {
     // resume
-    active.paused = false;
     if (active.phase === 'rest') {
-      // resumeRest() reads pauseRemainingMs itself and recomputes restEndsAt.
-      // (Don't pre-consume pauseRemainingMs here — that used to zero the
-      // remaining rest and skip it entirely.)
-      saveActive();
+      // IMPORTANT: do NOT pre-set active.paused = false here.
+      // resumeRest() has a guard `if (!active.paused) return;` — if we set
+      // paused=false first, resumeRest() bails out and the rest-timer interval
+      // is NEVER restarted. The result: timer frozen at the paused value
+      // (often 00:00 if the rest had already expired) and no auto-advance.
+      // Let resumeRest() own the entire resume path.
       resumeRest();
     } else if (active.phase === 'set-running' && active.pauseStartedAt) {
+      active.paused = false;
       // shift setStartAt forward by paused duration so elapsed resumes where it froze
       const pausedMs = Date.now() - active.pauseStartedAt;
       active.setStartAt += pausedMs;
@@ -4837,12 +4839,18 @@ function togglePauseWorkout() {
       }, 250);
       refreshSetTimerDisplay();
     } else if (active.phase === 'prep' && active.pauseStartedAt) {
+      active.paused = false;
       // shift prepEndsAt forward by paused duration
       const pausedMs = Date.now() - active.pauseStartedAt;
       active.prepEndsAt = (active.prepEndsAt || Date.now()) + pausedMs;
       delete active.pauseStartedAt;
       saveActive();
       startPrepTimer();
+    } else {
+      // Safety fallback: nothing else to resume, just clear the flag so we
+      // don't get stuck paused forever.
+      active.paused = false;
+      saveActive();
     }
     showToast('Workout resumed');
   } else {
@@ -4861,6 +4869,9 @@ function togglePauseWorkout() {
     saveActive();
     showToast('Workout paused', 'warn');
   }
+  // resumeRest() and startPrepTimer() already call renderWorkout(); the pause
+  // branch and the set-running resume branch need it here. Calling it twice in
+  // the rest-resume case is harmless.
   renderWorkout();
 }
 
