@@ -2638,9 +2638,11 @@ input, textarea, select { font-family: inherit; }
 .exercise-overview-row.wc-overview-row .exercise-overview-name { color: var(--c-text-dim); }
 
 /* ============ WARMUP / COOLDOWN PLAN EDITOR ============ */
+/* Items are FULL cards identical to main exercise cards (plan-edit-exercise);
+   the block itself is just a titled group — transparent, no double-card look. */
 .plan-edit-wc {
-  padding: 14px;
-  margin-bottom: 14px;
+  padding: 0;
+  margin: 6px 0 18px 0;
 }
 .plan-edit-wc-title {
   font-size: 10.5px;
@@ -2654,64 +2656,21 @@ input, textarea, select { font-family: inherit; }
 .plan-edit-wc-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
-.plan-edit-wc-item {
-  display: block;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.18);
+/* Section-colored item number badge (matches the main card badge layout) */
+.plan-edit-exercise-num.warmup {
+  color: #39FF14;
+  box-shadow: var(--shadow-in-dark-sm), inset 0 0 0 1.5px rgba(57, 255, 20, 0.4);
 }
-.plan-edit-wc-row {
-  display: flex;
-  gap: 6px;
-  align-items: center;
+.plan-edit-exercise-num.cooldown {
+  color: #4fc3f7;
+  box-shadow: var(--shadow-in-dark-sm), inset 0 0 0 1.5px rgba(79, 195, 247, 0.4);
 }
-.plan-edit-wc-media-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-}
-.plan-edit-wc-media-row .plan-edit-media-label {
-  flex: 0 0 64px;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-.plan-edit-wc-media-row .plan-edit-media-input {
-  flex: 1;
-  height: 34px;
-  border: 0;
-  outline: 0;
-  border-radius: 8px;
-  padding: 0 10px;
-  font-size: 11.5px;
-  color: var(--c-text);
-  background: var(--c-bg-deep);
-  box-shadow: var(--shadow-in-dark-sm), var(--shadow-in-light-sm);
-  min-width: 0;
-}
-.plan-edit-wc-item input {
-  height: 36px;
-  border: 0;
-  outline: 0;
-  border-radius: 8px;
-  padding: 0 10px;
-  font-size: 12px;
-  color: var(--c-text);
-  background: var(--c-bg-deep);
-  box-shadow: var(--shadow-in-dark-sm), var(--shadow-in-light-sm);
-  min-width: 0;
-}
-.plan-edit-wc-name { flex: 2; }
-.plan-edit-wc-dur { flex: 0 0 64px; font-family: 'JetBrains Mono', monospace; text-align: center; color: var(--c-accent-bright); }
-.plan-edit-wc-note { flex: 2; }
 .plan-edit-wc-empty {
   font-size: 11px;
   color: var(--c-text-faint);
-  padding: 4px 0;
+  padding: 4px 0 10px 0;
 }
 /* ============ RESUME PROMPT ============ */
 .resume-banner {

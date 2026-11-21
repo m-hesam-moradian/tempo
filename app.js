@@ -1853,18 +1853,25 @@ function onCindyComplete() {
 /* Was the target duration reached on the current section item? (beep once) */
 let wcTargetHit = false;
 
-/* Convert a plan warmup/cooldown item into an engine exercise object. */
+/* Convert a plan warmup/cooldown item into an engine exercise object.
+   Honors the SAME fields as a main exercise (sets / rest / prep / sec-per-rep /
+   type) so section items behave identically — they're just placed in their
+   own section of the list. `durationSec` becomes the Timed target (progress bar). */
 function makeSectionExercise(item, section) {
   const dur = Number(item.durationSec) || 0;
+  const rawType = (item.type === 'strength' || item.type === 'timed') ? item.type : (dur > 0 ? 'timed' : 'strength');
+  const secPerRep = Number(item.secondsPerRep);
+  const sets = Math.max(1, parseIntSafe(item.sets, 10) || 1);
   return {
     id: item.id || (section + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 6)),
     name: (item.name || '').trim() || 'Item',
     section, // 'warmup' | 'cooldown' — absence = main workout
-    sets: 1,
+    sets,
     restSeconds: Number(item.restSeconds) > 0 ? Math.round(Number(item.restSeconds)) : 0,
     prepSeconds: item.prepSeconds != null ? Math.max(1, Math.min(60, Number(item.prepSeconds) || 3)) : 3,
-    type: dur > 0 ? 'timed' : 'strength',
-    wcDurationSec: dur,
+    secondsPerRep: (rawType === 'strength' && secPerRep > 0) ? Math.min(30, Math.round(secPerRep * 10) / 10) : undefined,
+    type: rawType,
+    wcDurationSec: rawType === 'timed' ? dur : 0,
     note: item.note || '',
     mediaLinks: Array.isArray(item.mediaLinks) ? item.mediaLinks.slice() : [],
     completedSets: [],
@@ -2152,12 +2159,14 @@ function renderWorkout() {
   }
 
   // ---- Warmup / cooldown section label override ----
+  // Same info layout as main exercises: item position + set count + the
+  // +/- set adjust buttons (kept — sections support multi-set items too).
   if (isWcCtx && active.phase !== 'rest') {
     const secItems = sectionItems(section);
     const pos = secItems.indexOf(ex) + 1;
-    phaseLabel = `${section === 'warmup' ? 'Warm Up' : 'Cool Down'} · Item ${pos} of ${secItems.length}`;
+    const setInfo = ex.sets > 1 ? ` · Set ${active.setIdx + 1} of ${ex.sets}` : '';
+    phaseLabel = `${section === 'warmup' ? 'Warm Up' : 'Cool Down'} · Item ${pos} of ${secItems.length}${setInfo}`;
     phaseLabelClass = section === 'warmup' ? ' prep' : ' cool-label';
-    setAdjustHtml = '';
   }
 
   // ---- Note / form cues (skill stage goal included) ----
@@ -2355,10 +2364,10 @@ function renderWorkout() {
         ${startLabel}
       </button>
       ${isSkill ? `<button class="skill-skip-link" id="btn-skip-stage" type="button">Skip Stage</button>` : ''}
-      ${isWcCtx ? '' : `<button class="add-exercise-btn" id="btn-add-exercise" type="button">
+      <button class="add-exercise-btn" id="btn-add-exercise" type="button">
         <svg viewBox="0 0 24 24"><path d="M12 5 L12 19"/><path d="M5 12 L19 12"/></svg>
-        + Add Exercise
-      </button>`}
+        ${isWcCtx ? '+ Add Item' : '+ Add Exercise'}
+      </button>
     `;
   } else if (active.phase === 'set-running') {
     let inputHtml;
@@ -2436,7 +2445,7 @@ function renderWorkout() {
       return `<div class="wc-check-item ${current ? 'current' : ''} ${done ? 'done' : ''}" data-wc-jump="${i}">
         <span class="wc-check-box">${done ? '<svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}</span>
         <span class="wc-check-name">${escapeHtml(e.name)}</span>
-        <span class="wc-check-dur">${e.wcDurationSec > 0 ? e.wcDurationSec + 's' : 'reps'}</span>
+        <span class="wc-check-dur">${e.sets > 1 ? e.sets + '× ' : ''}${e.type === 'timed' ? (e.wcDurationSec > 0 ? e.wcDurationSec + 's' : 'time') : 'reps'}</span>
       </div>`;
     }).join('');
     const doneCount = secItems.filter(e => e.completedSets.length > 0).length;
@@ -2694,45 +2703,57 @@ function adjustActiveSetCount(delta) {
    ============================================================ */
 function showAddExerciseModal() {
   if (!active) return;
+  // Adding during a warmup/cooldown item → the new item joins THAT section
+  // (temporary, active workout copy only — same as adding a main exercise).
+  const curEx = active.exercises[active.exerciseIdx];
+  const curSection = curEx ? getExSection(curEx) : 'main';
+  const inSection = curSection !== 'main';
+  const itemWord = inSection ? 'Item' : 'Exercise';
   showModal(`
-    <div class="modal-title">Add Custom Exercise</div>
-    <div class="modal-text">Insert a custom exercise AFTER the current one for THIS workout only. Your plan is not modified.</div>
+    <div class="modal-title">Add Custom ${itemWord}</div>
+    <div class="modal-text">Insert a custom ${itemWord.toLowerCase()} AFTER the current one${inSection ? ` (into the ${curSection} section)` : ''} for THIS workout only. Your plan is not modified.</div>
     <div class="modal-form">
       <div>
-        <label class="modal-form-label">Exercise Name</label>
+        <label class="modal-form-label">${itemWord} Name</label>
         <input type="text" id="add-ex-name" class="plan-edit-input" placeholder="e.g. Face Pulls" autocomplete="off" maxlength="60">
       </div>
       <div class="modal-form-row">
         <div>
           <label class="modal-form-label">Sets</label>
-          <input type="number" id="add-ex-sets" class="plan-edit-input" min="1" max="20" step="1" value="3" inputmode="numeric">
+          <input type="number" id="add-ex-sets" class="plan-edit-input" min="1" max="20" step="1" value="${inSection ? 1 : 3}" inputmode="numeric">
         </div>
         <div>
           <label class="modal-form-label">Rest (sec)</label>
-          <input type="number" id="add-ex-rest" class="plan-edit-input" min="0" max="600" step="15" value="90" inputmode="numeric">
+          <input type="number" id="add-ex-rest" class="plan-edit-input" min="0" max="600" step="15" value="${inSection ? 0 : 90}" inputmode="numeric">
         </div>
       </div>
       <div class="modal-form-row">
         <div>
+          <label class="modal-form-label">Prep (sec)</label>
+          <input type="number" id="add-ex-prep" class="plan-edit-input" min="1" max="60" step="1" value="${inSection ? 3 : 5}" inputmode="numeric">
+        </div>
+        <div>
           <label class="modal-form-label">Sec/Rep (optional)</label>
           <input type="number" id="add-ex-tempo" class="plan-edit-input" min="0" max="30" step="0.5" value="" placeholder="e.g. 4" inputmode="decimal" title="Ideal seconds per rep — tempo coach compares your real set time">
         </div>
-        <div>
-          <label class="modal-form-label">&nbsp;</label>
-          <div style="font-size:10px;color:var(--c-text-faint);line-height:1.4;padding:12px 0 0 0;">Blank = no tempo feedback</div>
-        </div>
       </div>
-      <div>
-        <label class="modal-form-label">Type</label>
-        <select id="add-ex-type" class="plan-edit-input">
-          <option value="strength">Strength</option>
-          <option value="timed">Timed</option>
-        </select>
+      <div class="modal-form-row">
+        <div>
+          <label class="modal-form-label">Type</label>
+          <select id="add-ex-type" class="plan-edit-input">
+            <option value="strength">Strength</option>
+            <option value="timed">Timed</option>
+          </select>
+        </div>
+        <div>
+          <label class="modal-form-label">Target (sec, optional)</label>
+          <input type="number" id="add-ex-target" class="plan-edit-input" min="0" max="600" step="5" value="" placeholder="e.g. 60" inputmode="numeric" title="Timed items only — target duration shown as a progress bar. Blank = none.">
+        </div>
       </div>
     </div>
     <div class="modal-actions">
       <button class="btn-primary secondary" id="modal-add-ex-cancel">Cancel</button>
-      <button class="btn-primary" id="modal-add-ex-confirm">Add Exercise</button>
+      <button class="btn-primary" id="modal-add-ex-confirm">Add ${itemWord}</button>
     </div>
   `);
   const nameInput = document.getElementById('add-ex-name');
@@ -2741,24 +2762,29 @@ function showAddExerciseModal() {
   document.getElementById('modal-add-ex-confirm').addEventListener('click', () => {
     const name = (nameInput ? nameInput.value : '').trim();
     if (!name) {
-      showToast('Please enter an exercise name', 'warn');
+      showToast(`Please enter a ${itemWord.toLowerCase()} name`, 'warn');
       if (nameInput) nameInput.focus();
       return;
     }
-    const sets = Math.max(1, parseIntSafe(document.getElementById('add-ex-sets').value, 10) || 3);
-    const restSeconds = Math.max(0, parseIntSafe(document.getElementById('add-ex-rest').value, 10) || 90);
+    const sets = Math.max(1, parseIntSafe(document.getElementById('add-ex-sets').value, 10) || (inSection ? 1 : 3));
+    const restSeconds = Math.max(0, parseIntSafe(document.getElementById('add-ex-rest').value, 10) || 0);
+    const prepSeconds = Math.min(60, Math.max(1, parseIntSafe(document.getElementById('add-ex-prep').value, 10) || (inSection ? 3 : 5)));
     const tempoVal = parseNum(document.getElementById('add-ex-tempo').value);
     const secondsPerRep = (!isNaN(tempoVal) && tempoVal > 0) ? Math.min(30, Math.round(tempoVal * 10) / 10) : undefined;
     const type = document.getElementById('add-ex-type').value === 'timed' ? 'timed' : 'strength';
+    const targetVal = parseIntSafe(document.getElementById('add-ex-target').value, 10);
+    const targetSec = (!isNaN(targetVal) && targetVal > 0 && type === 'timed') ? Math.min(600, targetVal) : 0;
     const newEx = {
       id: 'custom-' + Date.now().toString(36),
       name,
       sets,
       restSeconds,
-      prepSeconds: 5,
+      prepSeconds,
       secondsPerRep,
       type,
-      note: 'Custom exercise added during workout',
+      section: inSection ? curSection : undefined,
+      wcDurationSec: inSection ? targetSec : 0,
+      note: 'Custom item added during workout',
       mediaLinks: [],
       completedSets: [],
     };
@@ -3706,24 +3732,82 @@ function renderPlan() {
       list.appendChild(card);
     });
 
-    // Warmup / Cooldown (optional) editor blocks — after the exercise cards
+    // Warmup / Cooldown (optional) editor blocks — after the exercise cards.
+    // Each item is a FULL card mirroring the main exercise editor (sets/rest/prep/
+    // sec-per-rep/type/target/id/note/all 4 media links/up-down-remove).
     ['warmup', 'cooldown'].forEach(wcKind => {
       const wcItems = Array.isArray(day[wcKind]) ? day[wcKind] : [];
       const block = document.createElement('div');
-      block.className = 'plan-edit-wc neu-raised-sm';
+      block.className = 'plan-edit-wc';
       const rows = wcItems.map((it, i) => {
-        const ytUrl = ((it.mediaLinks || []).find(m => (m.type || detectMediaType(m.url)) === 'youtube') || {}).url || '';
+        const ml = Array.isArray(it.mediaLinks) ? it.mediaLinks : [];
+        const findUrl = (t) => ((ml.find(m => (m.type || detectMediaType(m.url)) === t) || {}).url || '');
+        // explicit type wins; legacy items derive it from durationSec
+        const type = it.type === 'strength' || it.type === 'timed'
+          ? it.type
+          : (Number(it.durationSec) > 0 ? 'timed' : 'strength');
+        const attr = (f) => `data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="${f}"`;
+        const val = (v) => escapeHtml(String(v == null ? '' : v)).replace(/"/g, '&quot;');
+        const mediaRow = (t, label, color, ph) => `
+          <div class="plan-edit-media-row">
+            <label class="plan-edit-media-label" style="color:${color};">${label}</label>
+            <input type="url" class="plan-edit-media-input" data-wc-kind="${wcKind}" data-wc-media-idx="${i}" data-wc-media-type="${t}" value="${val(findUrl(t))}" placeholder="${ph}">
+          </div>`;
         return `
-        <div class="plan-edit-wc-item">
-          <div class="plan-edit-wc-row">
-            <input type="text" class="plan-edit-wc-name" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="name" value="${escapeHtml(it.name || '').replace(/"/g, '&quot;')}" placeholder="Item name">
-            <input type="number" class="plan-edit-wc-dur" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="durationSec" min="0" max="600" step="5" value="${it.durationSec != null ? it.durationSec : ''}" placeholder="sec" inputmode="numeric" title="Duration in seconds — 0 or blank = reps-based item (no timer)">
-            <input type="text" class="plan-edit-wc-note" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="note" value="${escapeHtml(it.note || '').replace(/"/g, '&quot;')}" placeholder="Note (optional)">
-            <button class="plan-edit-mini-btn danger" data-wc-remove-kind="${wcKind}" data-wc-remove="${i}" type="button">Remove</button>
+        <div class="plan-edit-exercise plan-edit-wc-card neu-raised-sm">
+          <div class="plan-edit-exercise-head">
+            <div class="plan-edit-exercise-num ${wcKind}">${i+1}</div>
+            <input type="text" class="plan-edit-exercise-name" ${attr('name')} value="${val(it.name)}" placeholder="Item name">
           </div>
-          <div class="plan-edit-wc-media-row">
-            <label class="plan-edit-media-label" style="color:var(--c-accent-bright);">YouTube</label>
-            <input type="url" class="plan-edit-media-input" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="youtube" value="${escapeHtml(ytUrl).replace(/"/g, '&quot;')}" placeholder="https://youtube.com/watch?v=… (form video — shown during the workout)">
+          <div class="plan-edit-exercise-fields">
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label">Sets</label>
+              <input type="number" class="plan-edit-field-input" ${attr('sets')} min="1" max="20" step="1" value="${it.sets != null ? it.sets : 1}">
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label">Rest (sec)</label>
+              <input type="number" class="plan-edit-field-input" ${attr('restSeconds')} min="0" max="600" step="15" value="${it.restSeconds != null ? it.restSeconds : 0}">
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label" style="color:#39FF14;">Prep (sec)</label>
+              <input type="number" class="plan-edit-field-input" ${attr('prepSeconds')} min="1" max="60" step="1" value="${it.prepSeconds != null ? it.prepSeconds : 3}" style="color:#39FF14;">
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label" style="color:#4fc3f7;">Sec/Rep</label>
+              <input type="number" class="plan-edit-field-input" ${attr('secondsPerRep')} min="0" max="30" step="0.5" value="${it.secondsPerRep != null ? it.secondsPerRep : ''}" placeholder="—" style="color:#4fc3f7;" title="Ideal seconds per rep (tempo coach). Blank = off.">
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label">Type</label>
+              <select class="plan-edit-field-input select" ${attr('type')}>
+                <option value="strength" ${type === 'strength' ? 'selected' : ''}>Strength</option>
+                <option value="timed" ${type === 'timed' ? 'selected' : ''}>Timed</option>
+              </select>
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label" style="color:#f6a623;">Target (sec)</label>
+              <input type="number" class="plan-edit-field-input" ${attr('durationSec')} min="0" max="600" step="5" value="${it.durationSec != null ? it.durationSec : ''}" placeholder="—" style="color:#f6a623;" title="Target duration for Timed items — shows a progress bar during the workout. Blank = no target.">
+            </div>
+            <div class="plan-edit-field">
+              <label class="plan-edit-field-label">ID (stable)</label>
+              <input type="text" class="plan-edit-field-input" ${attr('id')} value="${val(it.id)}" style="color:var(--c-text-dim);font-family:'JetBrains Mono',monospace;font-size:12px;">
+            </div>
+          </div>
+          <label class="plan-edit-label">Note</label>
+          <input type="text" class="plan-edit-input text" ${attr('note')} value="${val(it.note)}" placeholder="Form cues / instructions">
+          <div class="plan-edit-media">
+            <div class="plan-edit-media-label">
+              <svg viewBox="0 0 24 24"><path d="M2 12 C2 8 4 6 8 6 L16 6 C20 6 22 8 22 12 C22 16 20 18 16 18 L8 18 C4 18 2 16 2 12 Z"/><path d="M10 9 L15 12 L10 15 Z" fill="currentColor" stroke="none"/></svg>
+              Media Links
+            </div>
+            ${mediaRow('youtube', 'YouTube', 'var(--c-accent-bright)', 'https://youtube.com/watch?v=...')}
+            ${mediaRow('image', 'Image', '#a78bfa', 'https://example.com/form-photo.jpg')}
+            ${mediaRow('video', 'Video', 'var(--c-warn)', 'https://example.com/demo.mp4')}
+            ${mediaRow('link', 'Link', 'inherit', 'https://any-other-link.com')}
+          </div>
+          <div class="plan-edit-exercise-actions">
+            <button class="plan-edit-mini-btn" data-wc-move-kind="${wcKind}" data-wc-move="${i}" data-wc-dir="up" type="button">↑ Up</button>
+            <button class="plan-edit-mini-btn" data-wc-move-kind="${wcKind}" data-wc-move="${i}" data-wc-dir="down" type="button">↓ Down</button>
+            <button class="plan-edit-mini-btn danger" data-wc-remove-kind="${wcKind}" data-wc-remove="${i}" type="button">Remove</button>
           </div>
         </div>
         `;
@@ -3877,34 +3961,88 @@ function renderPlan() {
         renderPlan();
       });
     });
-    // bind warmup / cooldown editor inputs
-    list.querySelectorAll('[data-wc-kind]').forEach(input => {
+    // bind warmup / cooldown editor inputs (full card — same fields as main exercises)
+    list.querySelectorAll('[data-wc-field]').forEach(input => {
       input.addEventListener('change', () => {
         const wcKind = input.getAttribute('data-wc-kind');
         const idx = parseInt(input.getAttribute('data-wc-idx'), 10);
         const field = input.getAttribute('data-wc-field');
         if (!Array.isArray(day[wcKind])) day[wcKind] = [];
         const it = day[wcKind][idx];
-        if (!it) return;
-        if (field === 'durationSec') {
+        if (!it || !field) return;
+        if (field === 'sets') {
+          const v = parseIntSafe(input.value, 10);
+          it.sets = (isNaN(v) || v < 1) ? 1 : Math.min(20, v);
+          input.value = String(it.sets);
+        } else if (field === 'restSeconds') {
+          const v = parseIntSafe(input.value, 10);
+          it.restSeconds = (isNaN(v) || v < 0) ? 0 : Math.min(600, v);
+          input.value = String(it.restSeconds);
+        } else if (field === 'prepSeconds') {
+          let v = parseIntSafe(input.value, 10);
+          if (isNaN(v) || v < 1) v = 3;
+          if (v > 60) v = 60;
+          it.prepSeconds = v;
+          input.value = String(v);
+        } else if (field === 'secondsPerRep') {
+          // Optional tempo-coach field. Blank / 0 → remove.
+          const v = parseNum(input.value);
+          if (isNaN(v) || v <= 0) {
+            delete it.secondsPerRep;
+            if (input.value !== '') input.value = '';
+          } else {
+            it.secondsPerRep = Math.min(30, Math.round(v * 10) / 10);
+            input.value = String(it.secondsPerRep);
+          }
+        } else if (field === 'type') {
+          it.type = input.value === 'strength' ? 'strength' : 'timed';
+        } else if (field === 'durationSec') {
           const v = parseIntSafe(input.value, 10);
           if (isNaN(v) || v <= 0) delete it.durationSec;
           else it.durationSec = Math.min(600, v);
-        } else if (field === 'youtube') {
-          // YouTube form-video link per warmup/cooldown item
-          const url = input.value.trim();
-          if (!Array.isArray(it.mediaLinks)) it.mediaLinks = [];
-          let entry = it.mediaLinks.find(m => (m.type || detectMediaType(m.url)) === 'youtube');
-          if (!url) {
-            if (entry) it.mediaLinks = it.mediaLinks.filter(m => m !== entry);
-          } else if (!entry) {
-            it.mediaLinks.push({ type: 'youtube', label: 'YouTube', url });
-          } else {
-            entry.url = url;
-          }
         } else {
+          // name / note / id — plain text
           it[field] = input.value;
         }
+      });
+    });
+    // bind warmup / cooldown media link inputs (4 types, same as main exercises)
+    list.querySelectorAll('[data-wc-media-idx]').forEach(input => {
+      input.addEventListener('change', () => {
+        const wcKind = input.getAttribute('data-wc-kind');
+        const idx = parseInt(input.getAttribute('data-wc-media-idx'), 10);
+        const type = input.getAttribute('data-wc-media-type');
+        if (!Array.isArray(day[wcKind])) return;
+        const it = day[wcKind][idx];
+        if (!it) return;
+        if (!Array.isArray(it.mediaLinks)) it.mediaLinks = [];
+        const url = input.value.trim();
+        let entry = it.mediaLinks.find(m => (m.type || detectMediaType(m.url)) === type);
+        if (!url) {
+          if (entry) it.mediaLinks = it.mediaLinks.filter(m => m !== entry);
+          return;
+        }
+        if (!entry) {
+          it.mediaLinks.push({ type, label: type.charAt(0).toUpperCase() + type.slice(1), url });
+        } else {
+          entry.url = url;
+        }
+      });
+    });
+    // bind warmup / cooldown move up / down buttons
+    list.querySelectorAll('[data-wc-move-kind]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wcKind = btn.getAttribute('data-wc-move-kind');
+        const idx = parseInt(btn.getAttribute('data-wc-move'), 10);
+        const dir = btn.getAttribute('data-wc-dir') === 'down' ? 1 : -1;
+        if (!Array.isArray(day[wcKind])) return;
+        const arr = day[wcKind];
+        const to = idx + dir;
+        if (to < 0 || to >= arr.length) return;
+        const tmp = arr[to];
+        arr[to] = arr[idx];
+        arr[idx] = tmp;
+        renderPlan();
       });
     });
     list.querySelectorAll('[data-wc-remove-kind]').forEach(btn => {
@@ -3920,7 +4058,15 @@ function renderPlan() {
       btn.addEventListener('click', () => {
         const wcKind = btn.getAttribute('data-wc-add');
         if (!Array.isArray(day[wcKind])) day[wcKind] = [];
-        day[wcKind].push({ id: wcKind + '-' + Date.now().toString(36), name: '', durationSec: 60 });
+        day[wcKind].push({
+          id: wcKind + '-' + Date.now().toString(36),
+          name: '',
+          sets: 1,
+          restSeconds: 0,
+          prepSeconds: 3,
+          type: 'timed',
+          durationSec: 60,
+        });
         renderPlan();
       });
     });

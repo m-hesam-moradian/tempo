@@ -207,6 +207,10 @@
         {
           "id": "wu-example",
           "name": "Jumping Jacks",
+          "sets": 1,
+          "restSeconds": 0,
+          "prepSeconds": 3,
+          "type": "timed",
           "durationSec": 60,
           "note": "Raise body temperature",
           "mediaLinks": [
@@ -220,7 +224,11 @@
         {
           "id": "wu-example2",
           "name": "Band Pull-Aparts",
-          "durationSec": null,
+          "sets": 2,
+          "restSeconds": 30,
+          "prepSeconds": 3,
+          "type": "strength",
+          "secondsPerRep": 2,
           "note": "Reps-based item — enter reps at Done"
         }
       ],
@@ -310,5 +318,5 @@
       ]
     }
   ],
-  "_comment_summary": "QUICK REFERENCE — every option TEMPO supports:\n\nDAY TYPES (day.type): 'strength' | 'cindy' | 'rest' | 'skill'\nEXERCISE TYPES (exercise.type): 'strength' | 'timed' | 'skill'  (different from day types!)\nMEDIA TYPES (mediaLinks.type): 'youtube' | 'image' | 'video' | 'link'\n\nREQUIRED PLAN FIELDS: format, version, name, days[]\nREQUIRED DAY FIELDS: id, day, workoutName, type, exercises[]\nREQUIRED EXERCISE FIELDS: id, name, sets, restSeconds\nOPTIONAL EXERCISE FIELDS: type, note, mediaLinks[]\nREQUIRED CINDY FIELDS (if type='cindy'): cindy.durationSeconds, cindy.scheme[]\nREQUIRED SCHEME FIELDS: id, name, reps\nOPTIONAL SCHEME FIELDS: mediaLinks[]\nOPTIONAL REST FIELDS (if type='rest'): restNote\nOPTIONAL DAY SECTIONS: warmup[] and cooldown[] — guided item lists shown before/after the main workout.\n  Warmup: a 'Warm up first?' choice appears when the workout starts (pick Warmup First or Direct Start).\n  Cooldown: runs right after the last main exercise (or after the Cindy timer), before the completion screen.\n  Each item runs through the SAME engine as main exercises: prep countdown -> set timer (-1s/Edit/+1s) -> Done.\n  Item fields: id (req), name (req), durationSec (optional — >0 = timed item with a target bar; blank/0 = reps-based),\n               note (optional), mediaLinks[] (optional — e.g. a YouTube form video), restSeconds (optional, default 0),\n               prepSeconds (optional, default 3).\n\nLEGACY TYPES STILL ACCEPTED ON IMPORT (auto-migrated): 'strength_skill' → 'strength', 'amrap' → 'cindy', 'cardio' → 'rest'.\n\nVALID DAY IDS: monday, tuesday, wednesday, thursday, friday, saturday, sunday (all 7 must be present, order doesn't matter)."
+  "_comment_summary": "QUICK REFERENCE — every option TEMPO supports:\n\nDAY TYPES (day.type): 'strength' | 'cindy' | 'rest' | 'skill'\nEXERCISE TYPES (exercise.type): 'strength' | 'timed' | 'skill'  (different from day types!)\nMEDIA TYPES (mediaLinks.type): 'youtube' | 'image' | 'video' | 'link'\n\nREQUIRED PLAN FIELDS: format, version, name, days[]\nREQUIRED DAY FIELDS: id, day, workoutName, type, exercises[]\nREQUIRED EXERCISE FIELDS: id, name, sets, restSeconds\nOPTIONAL EXERCISE FIELDS: type, note, mediaLinks[]\nREQUIRED CINDY FIELDS (if type='cindy'): cindy.durationSeconds, cindy.scheme[]\nREQUIRED SCHEME FIELDS: id, name, reps\nOPTIONAL SCHEME FIELDS: mediaLinks[]\nOPTIONAL REST FIELDS (if type='rest'): restNote\nOPTIONAL DAY SECTIONS: warmup[] and cooldown[] — guided item lists shown before/after the main workout.\n  Warmup: a 'Warm up first?' choice appears when the workout starts (pick Warmup First or Direct Start).\n  Cooldown: runs right after the last main exercise (or after the Cindy timer), before the completion screen.\n  Each item runs through the SAME engine as main exercises: prep countdown -> set timer (-1s/Edit/+1s) -> Done.\n  Item fields = the SAME fields as a main exercise: id (req), name (req), sets (default 1), restSeconds (default 0),\n               prepSeconds (default 3), secondsPerRep (optional tempo coach, strength items), type ('strength' | 'timed'),\n               durationSec = \"Target (sec)\" for Timed items (progress bar during the workout; blank = no target),\n               note (optional), mediaLinks[] (optional — YouTube / image / video / link).\n\nLEGACY TYPES STILL ACCEPTED ON IMPORT (auto-migrated): 'strength_skill' → 'strength', 'amrap' → 'cindy', 'cardio' → 'rest'.\n\nVALID DAY IDS: monday, tuesday, wednesday, thursday, friday, saturday, sunday (all 7 must be present, order doesn't matter)."
 }
