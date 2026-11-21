@@ -1080,25 +1080,10 @@ function openDayView(dayId) {
         `;
         overview.appendChild(cindyCard);
         cindyCard.querySelector('#btn-backup-cindy').addEventListener('click', () => {
-          // Start Cindy workout with today's date
+          // Start Cindy (with its warmup/cooldown sections) using today's date
           const cindyDayId = cindyDay ? cindyDay.id : dayId;
           const cindyDayData = cindyDay || day;
-          active = {
-            date: todayStr(),
-            day: cindyDayId,
-            startedAt: Date.now(),
-            type: 'cindy',
-            phase: 'cindy-running',
-            cindyStartAt: Date.now(),
-            cindyDuration: cindyDayData.cindy ? cindyDayData.cindy.durationSeconds : cindyDuration,
-            rounds: 0,
-            partial: '',
-            completed: false,
-          };
-          saveActive();
-          startCindyTimer();
-          switchView('workout');
-          renderWorkout();
+          startCindyWorkout(cindyDayId, cindyDayData, cindyDuration);
         });
       }
 
@@ -1157,22 +1142,7 @@ function openDayView(dayId) {
         cindyCard2.querySelector('#btn-backup-cindy-caught').addEventListener('click', () => {
           const cindyDayId2 = cindyDay2 ? cindyDay2.id : dayId;
           const cindyDayData2 = cindyDay2 || day;
-          active = {
-            date: todayStr(),
-            day: cindyDayId2,
-            startedAt: Date.now(),
-            type: 'cindy',
-            phase: 'cindy-running',
-            cindyStartAt: Date.now(),
-            cindyDuration: cindyDayData2.cindy ? cindyDayData2.cindy.durationSeconds : cindyDuration2,
-            rounds: 0,
-            partial: '',
-            completed: false,
-          };
-          saveActive();
-          startCindyTimer();
-          switchView('workout');
-          renderWorkout();
+          startCindyWorkout(cindyDayId2, cindyDayData2, cindyDuration2);
         });
       }
 
@@ -1371,42 +1341,13 @@ function startWorkout(dayId) {
   }
 
   if (day.type === 'cindy') {
-    const wuItems = Array.isArray(day.warmup) ? day.warmup : [];
-    const createCindyActive = (withWarmup) => {
-      active = {
-        date: todayStr(),
-        day: dayId,
-        startedAt: Date.now(),
-        type: 'cindy',
-        phase: withWarmup ? 'warmup' : 'cindy-running',
-        cindyStartAt: withWarmup ? null : Date.now(),
-        cindyDuration: day.cindy.durationSeconds,
-        rounds: 0,
-        partial: '',
-        warmupItems: wuItems.map(w => ({ ...w })),
-        cooldownItems: (Array.isArray(day.cooldown) ? day.cooldown : []).map(c => ({ ...c })),
-        warmupIdx: 0,
-        warmupChecked: [],
-        cooldownIdx: 0,
-        cooldownChecked: [],
-        completed: false,
-      };
-      saveActive();
-      switchView('workout');
-      if (!withWarmup) startCindyTimer();
-      renderWorkout();
-    };
-    if (wuItems.length > 0) {
-      showWarmupChoice(day, createCindyActive);
-      return;
-    }
-    createCindyActive(false);
+    startCindyWorkout(dayId, day);
     return;
   }
 
   // Strength / skill workout
   const doCreateStrength = (withWarmup) => createStrengthActive(dayId, day, withWarmup);
-  if (Array.isArray(day.warmup) && day.warmup.length > 0) {
+  if (Array.isArray(day.warmup) && day.warmup.some(w => w && (w.name || '').trim())) {
     showWarmupChoice(day, doCreateStrength);
     return;
   }
@@ -1427,8 +1368,71 @@ function showWarmupChoice(day, onChoose) {
   document.getElementById('modal-wu-first').addEventListener('click', () => { closeModal(); onChoose(true); });
 }
 
+/* Shared Cindy starter — used by startWorkout AND the backup-day "Start Cindy" cards.
+   Warmup items run through the main exercise engine first (ready/prep/set-running),
+   then the AMRAP timer takes over (cindy-running), then the cooldown items. */
+function startCindyWorkout(dayId, dayData, fallbackDurationSec) {
+  const wuItems = (Array.isArray(dayData.warmup) ? dayData.warmup : []).filter(w => w && (w.name || '').trim());
+  const cdItems = (Array.isArray(dayData.cooldown) ? dayData.cooldown : []).filter(c => c && (c.name || '').trim());
+  const durationSec = (dayData.cindy && dayData.cindy.durationSeconds) || fallbackDurationSec || 1200;
+  const createCindyActive = (withWarmup) => {
+    active = {
+      date: todayStr(),
+      day: dayId,
+      startedAt: Date.now(),
+      type: 'cindy',
+      phase: withWarmup ? 'ready' : 'cindy-running',
+      exerciseIdx: 0,
+      setIdx: 0,
+      setStartAt: null,
+      restEndsAt: null,
+      paused: false,
+      pauseStartedAt: null,
+      mainEndAt: null,
+      cindyStartAt: withWarmup ? null : Date.now(),
+      cindyDuration: durationSec,
+      rounds: 0,
+      partial: '',
+      exercises: withWarmup ? wuItems.map(w => makeSectionExercise(w, 'warmup')) : [],
+      pendingCooldown: cdItems.slice(),
+      completed: false,
+    };
+    saveActive();
+    switchView('workout');
+    if (!withWarmup) startCindyTimer();
+    renderWorkout();
+  };
+  if (wuItems.length > 0) {
+    showWarmupChoice(dayData, createCindyActive);
+    return;
+  }
+  createCindyActive(false);
+}
+
 function createStrengthActive(dayId, day, withWarmup) {
-  const wuItems = Array.isArray(day.warmup) ? day.warmup : [];
+  const wuItems = (Array.isArray(day.warmup) ? day.warmup : []).filter(w => w && (w.name || '').trim());
+  const cdItems = (Array.isArray(day.cooldown) ? day.cooldown : []).filter(c => c && (c.name || '').trim());
+  // One unified exercise list: [warmup items] → [main exercises] → [cooldown items].
+  // Warmup/cooldown items carry a `section` field and run through the SAME
+  // engine as main exercises (prep countdown → set timer → Done → next).
+  const exercises = [];
+  if (withWarmup) wuItems.forEach(w => exercises.push(makeSectionExercise(w, 'warmup')));
+  day.exercises.forEach(ex => exercises.push({
+    id: ex.id,
+    name: ex.name,
+    sets: ex.sets,
+    restSeconds: ex.restSeconds,
+    prepSeconds: ex.prepSeconds != null ? ex.prepSeconds : 5,
+    secondsPerRep: ex.secondsPerRep != null ? ex.secondsPerRep : undefined,
+    type: ex.type,
+    note: ex.note,
+    mediaLinks: Array.isArray(ex.mediaLinks) ? ex.mediaLinks.slice() : [],
+    // Skill progression (optional) — copy the stage array so the active workout
+    // doesn't drift if the user edits the plan mid-workout.
+    progression: Array.isArray(ex.progression) ? ex.progression.map(s => ({ ...s })) : undefined,
+    completedSets: [],
+  }));
+  cdItems.forEach(c => exercises.push(makeSectionExercise(c, 'cooldown')));
   active = {
     date: todayStr(),
     day: dayId,
@@ -1436,33 +1440,13 @@ function createStrengthActive(dayId, day, withWarmup) {
     type: 'strength',
     exerciseIdx: 0,
     setIdx: 0,
-    phase: withWarmup ? 'warmup' : 'ready', // warmup | ready | set-running | rest | done-exercise | cooldown | complete
+    phase: 'ready', // ready | prep | set-running | rest | complete (legacy 'warmup'/'cooldown' are migrated)
     setStartAt: null,
     restEndsAt: null,
     paused: false,
     pauseStartedAt: null,
     mainEndAt: null,
-    warmupItems: wuItems.map(w => ({ ...w })),
-    cooldownItems: (Array.isArray(day.cooldown) ? day.cooldown : []).map(c => ({ ...c })),
-    warmupIdx: 0,
-    warmupChecked: [],
-    cooldownIdx: 0,
-    cooldownChecked: [],
-    exercises: day.exercises.map(ex => ({
-      id: ex.id,
-      name: ex.name,
-      sets: ex.sets,
-      restSeconds: ex.restSeconds,
-      prepSeconds: ex.prepSeconds != null ? ex.prepSeconds : 5,
-      secondsPerRep: ex.secondsPerRep != null ? ex.secondsPerRep : undefined,
-      type: ex.type,
-      note: ex.note,
-      mediaLinks: Array.isArray(ex.mediaLinks) ? ex.mediaLinks.slice() : [],
-      // Skill progression (optional) — copy the stage array so the active workout
-      // doesn't drift if the user edits the plan mid-workout.
-      progression: Array.isArray(ex.progression) ? ex.progression.map(s => ({ ...s })) : undefined,
-      completedSets: [],
-    })),
+    exercises,
     completed: false,
   };
   saveActive();
@@ -1472,29 +1456,29 @@ function createStrengthActive(dayId, day, withWarmup) {
 
 function enterWorkoutFromActive() {
   if (!active) { switchView('home'); return; }
-  if (active.type === 'cindy') {
-    // resume cindy timer
+  if (active.type === 'cindy' && (active.phase === 'cindy-running' || active.phase === 'cindy-done')) {
+    // resume cindy AMRAP timer
     if (active.phase === 'cindy-running') startCindyTimer();
     switchView('workout');
     renderWorkout();
     return;
   }
-  // Warmup / cooldown phases (both strength and cindy types)
+  // Warmup / cooldown phases — legacy saved state → convert to the section engine first
   if (active.phase === 'warmup' || active.phase === 'cooldown') {
+    migrateLegacyWc();
     switchView('workout');
     renderWorkout();
-    if (!active.paused) startWcIntervalOnly(); // resume ticking (expired items auto-advance)
     return;
   }
   // Resume prep timer if we were mid-prep when the app refreshed/closed.
-  if (active.type === 'strength' && active.phase === 'prep') {
+  if ((active.type === 'strength' || active.type === 'cindy') && active.phase === 'prep') {
     switchView('workout');
     renderWorkout();
     startPrepTimer();
     return;
   }
   // Mid-set: make sure the ticking interval is alive again after coming back.
-  if (active.type === 'strength' && active.phase === 'set-running' && !active.paused) {
+  if ((active.type === 'strength' || active.type === 'cindy') && active.phase === 'set-running' && !active.paused) {
     switchView('workout');
     renderWorkout();
     if (setTimerHandle) clearInterval(setTimerHandle);
@@ -1528,9 +1512,10 @@ function clearAllTimers() {
 }
 
 function startSetTimer() {
-  if (!active || active.type !== 'strength') return;
+  if (!active || (active.type !== 'strength' && active.type !== 'cindy')) return;
   active.setStartAt = Date.now();
   active.phase = 'set-running';
+  wcTargetHit = false;
   saveActive();
   if (setTimerHandle) clearInterval(setTimerHandle);
   setTimerHandle = setInterval(() => {
@@ -1555,6 +1540,26 @@ function getSetElapsedSec() {
 function refreshSetTimerDisplay() {
   const timerEl = document.getElementById('set-timer-display');
   if (timerEl) timerEl.textContent = formatDuration(getSetElapsedSec());
+  // Warmup / cooldown timed items: progress toward the target duration + beep once reached.
+  const ex = active ? active.exercises[active.exerciseIdx] : null;
+  if (ex && ex.wcDurationSec > 0 && getExSection(ex) !== 'main') {
+    const elapsed = getSetElapsedSec();
+    const ratio = Math.min(1, elapsed / ex.wcDurationSec);
+    const fillEl = document.getElementById('wc-target-fill');
+    if (fillEl) fillEl.style.width = (ratio * 100) + '%';
+    const hintEl = document.getElementById('wc-target-hint');
+    if (hintEl) {
+      const hit = elapsed >= ex.wcDurationSec;
+      hintEl.textContent = hit ? '✓ Target reached — tap Done' : ('Target ' + ex.wcDurationSec + 's');
+      hintEl.classList.toggle('hit', hit);
+    }
+    if (elapsed >= ex.wcDurationSec && !wcTargetHit && !active.paused) {
+      wcTargetHit = true;
+      playBeep(880, 200, 'sine');
+      setTimeout(() => playBeep(1175, 300, 'sine'), 150);
+      vibrate([150, 80, 150]);
+    }
+  }
 }
 
 /* Nudge the set timer by ±deltaSec (+1s / −1s buttons). */
@@ -1611,7 +1616,7 @@ function stopSetTimer() {
    (matched by id) when edited on the workout screen.
    ============================================================ */
 function startPrepTimer() {
-  if (!active || active.type !== 'strength') return;
+  if (!active || (active.type !== 'strength' && active.type !== 'cindy')) return;
   const ex = active.exercises[active.exerciseIdx];
   if (!ex) return;
   // If the prep-seconds input exists on screen, read its current value
@@ -1659,6 +1664,7 @@ function startPrepTimer() {
       delete active.prepEndsAt;
       active.phase = 'set-running';
       active.setStartAt = Date.now();
+      wcTargetHit = false;
       saveActive();
       renderWorkout();
       // Start the set timer (counts up elapsed)
@@ -1830,275 +1836,209 @@ function onCindyComplete() {
 }
 
 /* ============================================================
-   WARMUP / COOLDOWN PHASES
+   WARMUP / COOLDOWN SECTIONS (main-engine style)
    Optional per-day sections in the plan JSON:
      "warmup":  [{ id, name, durationSec, note, mediaLinks }]
      "cooldown": [{ ...same }]
+   Items are injected into active.exercises with a `section` field and
+   run through the SAME engine as main exercises: prep countdown
+   ("Get Ready") -> set timer with -1s/Edit/+1s -> Done -> next item,
+   with the usual pause button. durationSec > 0 = timed item (timer is
+   the result, with a target progress bar); blank/0 = reps item.
    Warmup: chosen via modal on workout start (warmup-first / direct).
-   Cooldown: shown after the last set (before the completion screen).
+   Cooldown: runs right after the last main exercise (strength) or
+   after the Cindy AMRAP (cindy), before the completion screen.
    ============================================================ */
-let wcTimerHandle = null;
 
-function stopWcTimer() {
-  if (wcTimerHandle) { clearInterval(wcTimerHandle); wcTimerHandle = null; }
+/* Was the target duration reached on the current section item? (beep once) */
+let wcTargetHit = false;
+
+/* Convert a plan warmup/cooldown item into an engine exercise object. */
+function makeSectionExercise(item, section) {
+  const dur = Number(item.durationSec) || 0;
+  return {
+    id: item.id || (section + '-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 6)),
+    name: (item.name || '').trim() || 'Item',
+    section, // 'warmup' | 'cooldown' — absence = main workout
+    sets: 1,
+    restSeconds: Number(item.restSeconds) > 0 ? Math.round(Number(item.restSeconds)) : 0,
+    prepSeconds: item.prepSeconds != null ? Math.max(1, Math.min(60, Number(item.prepSeconds) || 3)) : 3,
+    type: dur > 0 ? 'timed' : 'strength',
+    wcDurationSec: dur,
+    note: item.note || '',
+    mediaLinks: Array.isArray(item.mediaLinks) ? item.mediaLinks.slice() : [],
+    completedSets: [],
+  };
 }
 
-function getWcKind() { return active.phase === 'warmup' ? 'warmup' : 'cooldown'; }
-function getWcItems() { return active[getWcKind() + 'Items'] || []; }
-function getWcChecked() { return active[getWcKind() + 'Checked'] || (active[getWcKind() + 'Checked'] = []); }
-
-function getWcRemainingMs() {
-  if (!active) return 0;
-  if (active.paused && active.wcPauseRemainingMs != null) return Math.max(0, active.wcPauseRemainingMs);
-  if (!active.wcEndsAt) return 0;
-  return Math.max(0, active.wcEndsAt - Date.now());
+function getExSection(ex) { return (ex && ex.section) || 'main'; }
+function sectionItems(section) {
+  return (active && Array.isArray(active.exercises)) ? active.exercises.filter(e => getExSection(e) === section) : [];
 }
 
-/* Start the countdown for the current item (fresh). */
-function startWcItemTimer(durationSec) {
-  stopWcTimer();
-  active.wcDurationMs = durationSec * 1000;
-  active.wcEndsAt = Date.now() + durationSec * 1000;
-  delete active.wcPauseRemainingMs;
-  saveActive();
-  startWcIntervalOnly();
-}
-
-/* Restart just the ticking interval (keeps existing wcEndsAt). */
-function startWcIntervalOnly() {
-  stopWcTimer();
-  wcTimerHandle = setInterval(wcTick, 250);
-}
-
-function wcTick() {
-  if (!active || (active.phase !== 'warmup' && active.phase !== 'cooldown')) { stopWcTimer(); return; }
-  if (currentView === 'workout') {
-    const remainingMs = getWcRemainingMs();
-    const timerEl = document.getElementById('wc-timer-text');
-    if (timerEl) timerEl.textContent = formatDuration(Math.ceil(remainingMs / 1000));
-    if (active.wcDurationMs) updateTimerRingProgress('wc-timer-progress', remainingMs / active.wcDurationMs);
+/* Move to a specific exercise index (next item, checklist jump, section skip).
+   Handles the warmup->main and main->cooldown transitions. */
+function goToExercise(idx, opts = {}) {
+  if (!active) return;
+  const toEx = active.exercises[idx];
+  if (!toEx) return;
+  stopSetTimer();
+  if (restTimerHandle) { clearInterval(restTimerHandle); restTimerHandle = null; }
+  const fromEx = active.exercises[active.exerciseIdx];
+  const fromSection = fromEx ? getExSection(fromEx) : null;
+  const toSection = getExSection(toEx);
+  if (fromSection === 'warmup' && toSection === 'main') {
+    // Warmup time doesn't count toward the workout duration.
+    active.startedAt = Date.now();
+    showToast(opts.skip ? 'Warmup done — workout time!' : 'Warmup complete — let\'s go!', 'success');
+  } else if (fromSection === 'main' && toSection === 'cooldown') {
+    if (!active.mainEndAt) active.mainEndAt = Date.now();
+    showToast(opts.skip ? 'Heading into the cooldown' : 'Main workout done — cool down', 'info');
   }
-  // Auto-advance only for items that actually have a timer and aren't already done
-  if (active.wcEndsAt && active.wcDurationMs && !active.paused && getWcRemainingMs() <= 0) {
-    const curIdx = active[getWcKind() + 'Idx'] || 0;
-    const curChecked = (active[getWcKind() + 'Checked'] || [])[curIdx];
-    if (!curChecked) {
-      playBeep(880, 200, 'sine');
-      setTimeout(() => playBeep(1175, 300, 'sine'), 150);
-      vibrate([150, 80, 150]);
-      advanceWcItem(true);
+  active.exerciseIdx = idx;
+  active.setIdx = 0;
+  active.phase = 'ready';
+  active.setStartAt = null;
+  active.paused = false;
+  ['pauseStartedAt', 'pauseRemainingMs', 'prepEndsAt'].forEach(k => delete active[k]);
+  saveActive();
+  renderWorkout();
+}
+
+/* Called when the finished exercise is the last of its section. */
+function onSectionBoundary(ex, nextEx) {
+  if (!active) return;
+  const section = getExSection(ex);
+  if (section === 'main' && !active.mainEndAt) active.mainEndAt = Date.now();
+  if (!nextEx) {
+    if (active.type === 'cindy') {
+      if (section === 'warmup') startCindyMain();
+      else finalizeCindyWorkout();
     } else {
-      stopWcTimer();
+      completeWorkout();
+    }
+    return;
+  }
+  goToExercise(active.exerciseIdx + 1);
+}
+
+/* Cindy: warmup finished -> start the AMRAP timer. */
+function startCindyMain() {
+  if (!active) return;
+  stopSetTimer();
+  if (restTimerHandle) { clearInterval(restTimerHandle); restTimerHandle = null; }
+  active.phase = 'cindy-running';
+  active.cindyStartAt = Date.now();
+  active.startedAt = Date.now();
+  saveActive();
+  renderWorkout();
+  startCindyTimer();
+  showToast('Warmup complete — Cindy starts now!', 'success');
+}
+
+/* Cindy: AMRAP finished -> load the pending cooldown items into the engine. */
+function enterCooldownPhase() {
+  if (!active) return;
+  clearAllTimers();
+  active.mainEndAt = Date.now();
+  active.exercises = (Array.isArray(active.pendingCooldown) ? active.pendingCooldown : [])
+    .filter(c => c && (c.name || '').trim())
+    .map(c => makeSectionExercise(c, 'cooldown'));
+  active.pendingCooldown = [];
+  active.exerciseIdx = 0;
+  active.setIdx = 0;
+  active.phase = 'ready';
+  active.setStartAt = null;
+  active.paused = false;
+  ['pauseStartedAt', 'pauseRemainingMs', 'prepEndsAt'].forEach(k => delete active[k]);
+  saveActive();
+  renderWorkout();
+}
+
+/* Checklist tap -> jump to a warmup/cooldown item (re-does it). */
+function jumpToSectionItem(i) {
+  if (!active) return;
+  const target = active.exercises[i];
+  if (!target || getExSection(target) === 'main') return;
+  target.completedSets = []; // jumping re-opens the item
+  goToExercise(i);
+}
+
+/* "Skip to workout" / "Skip cooldown" link on section item screens. */
+function skipSection() {
+  if (!active) return;
+  const curEx = active.exercises[active.exerciseIdx];
+  if (!curEx) return;
+  const section = getExSection(curEx);
+  if (section === 'main') return;
+  const nextIdx = active.exercises.findIndex(e => getExSection(e) !== section);
+  if (nextIdx === -1 || nextIdx <= active.exerciseIdx) {
+    // nothing after this section
+    if (active.type === 'cindy' && section === 'warmup') { startCindyMain(); return; }
+    if (active.type === 'cindy') { finalizeCindyWorkout(); return; }
+    completeWorkout();
+    return;
+  }
+  goToExercise(nextIdx, { skip: true });
+}
+
+/* Legacy saved workouts (saved before the section engine) with phase
+   'warmup'/'cooldown' are converted into the new format on first use. */
+function migrateLegacyWc() {
+  if (!active) return;
+  if (active.phase !== 'warmup' && active.phase !== 'cooldown') return;
+  const kind = active.phase;
+  const mk = (it, section, done) => {
+    const ex = makeSectionExercise(it || {}, section);
+    if (done) {
+      const d = Number(it && it.durationSec) || 0;
+      ex.completedSets = [{ reps: d, durationSec: d }];
+    }
+    return ex;
+  };
+  const wuItems = Array.isArray(active.warmupItems) ? active.warmupItems : [];
+  const cdItems = Array.isArray(active.cooldownItems) ? active.cooldownItems : [];
+  if (active.type === 'cindy') {
+    active.pendingCooldown = cdItems.slice();
+    if (kind === 'warmup') {
+      active.exercises = wuItems.map((it, i) => mk(it, 'warmup', !!(active.warmupChecked || [])[i]));
+      active.exerciseIdx = wuItems.length ? Math.max(0, Math.min(active.warmupIdx || 0, wuItems.length - 1)) : 0;
+    } else {
+      active.exercises = cdItems.map((it, i) => mk(it, 'cooldown', !!(active.cooldownChecked || [])[i]));
+      active.exerciseIdx = cdItems.length ? Math.max(0, Math.min(active.cooldownIdx || 0, cdItems.length - 1)) : 0;
+    }
+  } else {
+    const mainList = Array.isArray(active.exercises) ? active.exercises.filter(e => !e.section) : [];
+    const wu = wuItems.map((it, i) => mk(it, 'warmup', !!(active.warmupChecked || [])[i]));
+    const cd = cdItems.map((it, i) => mk(it, 'cooldown', !!(active.cooldownChecked || [])[i]));
+    if (kind === 'warmup') {
+      active.exercises = [...wu, ...mainList, ...cd];
+      active.exerciseIdx = wu.length ? Math.max(0, Math.min(active.warmupIdx || 0, wu.length - 1)) : 0;
+    } else {
+      active.exercises = [...mainList, ...cd];
+      active.exerciseIdx = mainList.length + (cd.length ? Math.max(0, Math.min(active.cooldownIdx || 0, cd.length - 1)) : 0);
     }
   }
-}
-
-/* Mark current item done (or just move on) and jump to the next unchecked item. */
-function advanceWcItem(markDone) {
-  if (!active) return;
-  const kind = getWcKind();
-  const items = active[kind + 'Items'] || [];
-  const checked = active[kind + 'Checked'] || (active[kind + 'Checked'] = []);
-  const idx = active[kind + 'Idx'] || 0;
-  if (markDone && items[idx]) checked[idx] = true;
-  let next = -1;
-  for (let i = 0; i < items.length; i++) { if (!checked[i]) { next = i; break; } }
-  stopWcTimer();
-  if (next === -1) {
-    // All items done — stay on the last one, stop the countdown.
-    active[kind + 'Idx'] = Math.max(0, items.length - 1);
-    active.wcEndsAt = null;
-    active.wcDurationMs = null;
-    delete active.wcPauseRemainingMs;
-    saveActive();
-    renderWorkout();
-    return;
-  }
-  active[kind + 'Idx'] = next;
-  // Clear stale countdown state when landing on a no-timer item
-  const nextDur = Number(items[next].durationSec) || 0;
-  if (!nextDur) { active.wcEndsAt = null; active.wcDurationMs = null; }
+  active.setIdx = 0;
+  active.setStartAt = null;
+  active.paused = false;
+  ['pauseStartedAt', 'pauseRemainingMs', 'prepEndsAt',
+   'warmupItems', 'cooldownItems', 'warmupIdx', 'cooldownIdx', 'warmupChecked', 'cooldownChecked',
+   'wcEndsAt', 'wcDurationMs', 'wcPauseRemainingMs'].forEach(k => delete active[k]);
+  active.phase = 'ready';
   saveActive();
-  renderWorkout();
 }
-
-/* Jump to a specific item (checklist tap). */
-function jumpToWcItem(i) {
-  if (!active) return;
-  const kind = getWcKind();
-  const items = active[kind + 'Items'] || [];
-  if (i < 0 || i >= items.length) return;
-  active[kind + 'Idx'] = i;
-  stopWcTimer();
-  active.wcEndsAt = null;
-  active.wcDurationMs = null;
-  delete active.wcPauseRemainingMs;
-  saveActive();
-  renderWorkout();
-}
-
-/* Extend the current item countdown by deltaSec. */
-function adjustWcTimer(deltaSec) {
-  if (!active || !active.wcEndsAt || !active.wcDurationMs) return;
-  if (active.paused && active.wcPauseRemainingMs != null) {
-    active.wcPauseRemainingMs = Math.max(1000, active.wcPauseRemainingMs + deltaSec * 1000);
-    active.wcDurationMs += deltaSec * 1000;
-  } else {
-    active.wcEndsAt = Math.max(Date.now() + 1000, active.wcEndsAt + deltaSec * 1000);
-    active.wcDurationMs += deltaSec * 1000;
-  }
-  saveActive();
-  renderWorkout();
-}
-
-/* Finish the warmup → enter the actual workout. */
-function finishWarmupPhase() {
-  if (!active) return;
-  stopWcTimer();
-  delete active.wcEndsAt;
-  delete active.wcDurationMs;
-  delete active.wcPauseRemainingMs;
-  if (active.type === 'cindy') {
-    active.phase = 'cindy-running';
-    active.cindyStartAt = Date.now();
-    saveActive();
-    startCindyTimer();
-    renderWorkout();
-  } else {
-    active.phase = 'ready';
-    // Warmup time doesn't count toward the workout duration
-    active.startedAt = Date.now();
-    saveActive();
-    renderWorkout();
-  }
-}
-
-/* Enter the cooldown phase (called when the main workout finishes). */
-function enterCooldownPhase() {
-  active.mainEndAt = Date.now();
-  active.phase = 'cooldown';
-  active.cooldownIdx = 0;
-  active.cooldownChecked = [];
-  stopWcTimer();
-  delete active.wcEndsAt;
-  delete active.wcDurationMs;
-  delete active.wcPauseRemainingMs;
-  saveActive();
-  clearAllTimers();
-  renderWorkout();
-}
-
-/* Finish the cooldown → log + completion screen. */
-function finishCooldownPhase() {
-  if (!active) return;
-  const type = active.type;
-  if (type === 'cindy') finalizeCindyWorkout();
-  else finalizeStrengthWorkout();
-}
-
-/* Render the warmup / cooldown screen inside the workout view. */
-function renderWarmCooldownScreen(screen, fill) {
-  const kind = getWcKind();
-  const items = getWcItems();
-  if (!items.length) {
-    // Nothing to show — skip straight ahead
-    if (kind === 'warmup') finishWarmupPhase(); else finishCooldownPhase();
-    return;
-  }
-  const checked = getWcChecked();
-  const idx = Math.min(active[kind + 'Idx'] || 0, items.length - 1);
-  active[kind + 'Idx'] = idx;
-  const cur = items[idx];
-  const dur = Number(cur.durationSec) || 0;
-  const isWarmup = kind === 'warmup';
-
-  fill.style.width = isWarmup ? '0%' : '100%';
-  document.getElementById('btn-pause-workout').textContent = active.paused ? 'Resume' : 'Pause';
-
-  // ---- Timer area ----
-  const curIsDone = !!checked[idx];
-  let timerHtml;
-  if (dur > 0) {
-    const remainingMs = curIsDone ? dur * 1000 : getWcRemainingMs();
-    const durationMs = active.wcDurationMs || dur * 1000;
-    const remaining = Math.max(0, Math.ceil(remainingMs / 1000));
-    const progress = curIsDone ? 1 : (active.wcDurationMs ? remainingMs / active.wcDurationMs : 1);
-    timerHtml = `
-      <div class="timer-ring ${isWarmup ? '' : 'cool'}">
-        <svg viewBox="0 0 160 160" aria-hidden="true">
-          <circle class="timer-ring-track" cx="80" cy="80" r="68"></circle>
-          <circle class="timer-ring-progress" id="wc-timer-progress" pathLength="100" stroke-dasharray="100" stroke-dashoffset="${100 * (1 - progress)}" cx="80" cy="80" r="68"></circle>
-        </svg>
-        <div class="workout-timer rest" id="wc-timer-text">${formatDuration(remaining)}</div>
-      </div>
-    `;
-  } else {
-    timerHtml = `<div class="workout-timer" style="opacity:.35;">—</div><div class="prep-hint">No timer — tap Done when finished</div>`;
-  }
-
-  // ---- Checklist ----
-  const checklistHtml = items.map((it, i) => `
-    <div class="wc-check-item ${i === idx ? 'current' : ''} ${checked[i] ? 'done' : ''}" data-wc-jump="${i}">
-      <span class="wc-check-box">${checked[i] ? '<svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}</span>
-      <span class="wc-check-name">${escapeHtml(it.name || 'Item ' + (i+1))}</span>
-      <span class="wc-check-dur">${Number(it.durationSec) > 0 ? (it.durationSec + 's') : '—'}</span>
-    </div>
-  `).join('');
-
-  const doneCount = checked.filter(Boolean).length;
-  const mediaHtml = renderMediaChips(cur.mediaLinks);
-
-  screen.innerHTML = `
-    <div class="workout-phase-label ${isWarmup ? 'prep' : 'cool-label'}">${isWarmup ? 'Warm Up' : 'Cool Down'} · Item ${idx + 1} of ${items.length}</div>
-    <h2 class="workout-exercise-name">${escapeHtml(cur.name || 'Item ' + (idx + 1))}</h2>
-    ${cur.note ? `<div class="workout-target">${escapeHtml(cur.note)}</div>` : ''}
-    ${mediaHtml ? `<div class="workout-media-row">${mediaHtml}</div>` : ''}
-    <div class="workout-timer-area">${timerHtml}</div>
-    <div class="rest-controls">
-      ${dur > 0 ? `<button class="rest-btn" id="btn-wc-plus">+15s</button>` : ''}
-      <button class="rest-btn warn" id="btn-wc-done">✓ Done Item</button>
-    </div>
-    <div class="wc-checklist">${checklistHtml}</div>
-    <div class="wc-progress-line">${doneCount}/${items.length} items done</div>
-    <button class="btn-primary" id="btn-wc-finish" style="max-width:280px;margin:14px auto 0 auto;">
-      <svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7"/></svg>
-      ${isWarmup ? 'Start Workout' : 'Finish Workout'}
-    </button>
-    <button class="skill-skip-link" id="btn-wc-skip" type="button">${isWarmup ? 'Skip rest of warmup' : 'Skip cooldown'}</button>
-  `;
-
-  // ---- Bindings ----
-  const plusBtn = document.getElementById('btn-wc-plus');
-  if (plusBtn) plusBtn.addEventListener('click', () => adjustWcTimer(15));
-  document.getElementById('btn-wc-done').addEventListener('click', () => advanceWcItem(true));
-  screen.querySelectorAll('[data-wc-jump]').forEach(row => {
-    row.addEventListener('click', () => jumpToWcItem(parseInt(row.getAttribute('data-wc-jump'), 10)));
-  });
-  document.getElementById('btn-wc-finish').addEventListener('click', () => {
-    if (kind === 'warmup') finishWarmupPhase(); else finishCooldownPhase();
-  });
-  document.getElementById('btn-wc-skip').addEventListener('click', () => {
-    if (kind === 'warmup') finishWarmupPhase(); else finishCooldownPhase();
-  });
-
-  // ---- Make sure the item countdown is running (never for already-done items) ----
-  if (dur > 0 && !active.paused && !checked[idx]) {
-    if (!active.wcEndsAt) startWcItemTimer(dur);
-    else if (!wcTimerHandle) startWcIntervalOnly();
-  } else if (dur > 0 && curIsDone) {
-    stopWcTimer();
-  }
-}
-
 /* ============================================================
    RENDER WORKOUT (active)
    ============================================================ */
 function renderWorkout() {
   if (!active) { switchView('home'); return; }
+  // Legacy warmup/cooldown saved state → convert before anything else.
+  if (active.phase === 'warmup' || active.phase === 'cooldown') migrateLegacyWc();
   const screen = document.getElementById('workout-screen');
   const fill = document.getElementById('workout-progress-fill');
 
-  if (active.type === 'cindy') {
+  if (active.type === 'cindy' && (active.phase === 'cindy-running' || active.phase === 'cindy-done')) {
     renderCindy(screen);
     const elapsed = Math.floor((Date.now() - active.cindyStartAt) / 1000);
     const total = active.cindyDuration;
@@ -2112,19 +2052,27 @@ function renderWorkout() {
     return;
   }
 
-  // Warmup / cooldown phases (works for strength AND cindy types)
-  if (active.phase === 'warmup' || active.phase === 'cooldown') {
-    renderWarmCooldownScreen(screen, fill);
-    return;
-  }
+  // Warmup / cooldown section items flow through the SAME engine below
+  // (works for strength AND cindy types).
 
-  // Strength
+  // Strength / section items
   const ex = active.exercises[active.exerciseIdx];
   if (!ex) { completeWorkout(); return; }
 
-  const totalSets = active.exercises.reduce((s,e) => s + e.sets, 0);
-  const completedSets = active.exercises.reduce((s,e) => s + e.completedSets.length, 0);
-  fill.style.width = Math.min(100, (completedSets / totalSets) * 100) + '%';
+  const section = getExSection(ex);
+  const isWcCtx = section !== 'main';
+
+  // ---- Section-aware progress bar ----
+  if (section === 'main') {
+    const mainList = active.exercises.filter(e => getExSection(e) === 'main');
+    const totalSets = mainList.reduce((s,e) => s + e.sets, 0);
+    const completedSets = mainList.reduce((s,e) => s + e.completedSets.length, 0);
+    fill.style.width = Math.min(100, (completedSets / totalSets) * 100) + '%';
+  } else {
+    const secItems = sectionItems(section);
+    const doneItems = secItems.filter(e => e.completedSets.length > 0).length;
+    fill.style.width = (secItems.length ? (doneItems / secItems.length) * 100 : 0) + '%';
+  }
 
   // pause button label
   document.getElementById('btn-pause-workout').textContent = active.paused ? 'Resume' : 'Pause';
@@ -2198,7 +2146,18 @@ function renderWorkout() {
     }
   } else if (active.phase === 'rest') {
     const isNextExercise = displayEx.id !== ex.id;
-    phaseLabel = isNextExercise ? 'Next Exercise · Rest' : 'Next Set · Rest';
+    phaseLabel = isWcCtx
+      ? 'Next Item · Rest'
+      : (isNextExercise ? 'Next Exercise · Rest' : 'Next Set · Rest');
+  }
+
+  // ---- Warmup / cooldown section label override ----
+  if (isWcCtx && active.phase !== 'rest') {
+    const secItems = sectionItems(section);
+    const pos = secItems.indexOf(ex) + 1;
+    phaseLabel = `${section === 'warmup' ? 'Warm Up' : 'Cool Down'} · Item ${pos} of ${secItems.length}`;
+    phaseLabelClass = section === 'warmup' ? ' prep' : ' cool-label';
+    setAdjustHtml = '';
   }
 
   // ---- Note / form cues (skill stage goal included) ----
@@ -2211,10 +2170,13 @@ function renderWorkout() {
     noteText = noteText ? `${goalText} · ${noteText}` : goalText;
   }
 
-  // ---- Previous + Record line (ALWAYS visible) ----
+  // ---- Previous + Record line (main exercises only — sections aren't logged) ----
+  const isWcDisplay = getExSection(displayEx) !== 'main';
   let prevLine = '';
   let recordLine = '';
-  if (isSkill) {
+  if (isWcDisplay) {
+    // Warmup / cooldown items have no history — skip the lookups.
+  } else if (isSkill) {
     const prog = getSkillProgress(displayEx.id);
     const stageNum = prog.currentStage || 1;
     const isSeconds = skillStage.unit === 'seconds';
@@ -2343,8 +2305,14 @@ function renderWorkout() {
     // keep counting up while the workout is paused).
     const endTime = active.paused && active.pauseStartedAt ? active.pauseStartedAt : Date.now();
     const elapsed = Math.max(0, Math.floor((endTime - active.setStartAt) / 1000));
+    // Warmup/cooldown timed items: progress toward the target duration.
+    const wcTargetHtml = (isWcCtx && ex.wcDurationSec > 0)
+      ? `<div class="wc-target-bar"><div class="wc-target-fill" id="wc-target-fill" style="width:${Math.min(100, (elapsed / ex.wcDurationSec) * 100)}%"></div></div>
+         <div class="wc-target-hint${elapsed >= ex.wcDurationSec ? ' hit' : ''}" id="wc-target-hint">${elapsed >= ex.wcDurationSec ? '✓ Target reached — tap Done' : 'Target ' + ex.wcDurationSec + 's'}</div>`
+      : '';
     timerHtml = `
       <div class="workout-timer running ${active.paused ? 'paused' : ''}" id="set-timer-display">${formatDuration(elapsed)}</div>
+      ${wcTargetHtml}
       <div class="set-timer-controls">
         <button class="set-timer-btn" id="btn-set-timer-minus" title="Remove 1 second">−1s</button>
         <button class="set-timer-btn" id="btn-set-timer-edit" title="Set exact elapsed time">
@@ -2387,10 +2355,10 @@ function renderWorkout() {
         ${startLabel}
       </button>
       ${isSkill ? `<button class="skill-skip-link" id="btn-skip-stage" type="button">Skip Stage</button>` : ''}
-      <button class="add-exercise-btn" id="btn-add-exercise" type="button">
+      ${isWcCtx ? '' : `<button class="add-exercise-btn" id="btn-add-exercise" type="button">
         <svg viewBox="0 0 24 24"><path d="M12 5 L12 19"/><path d="M5 12 L19 12"/></svg>
         + Add Exercise
-      </button>
+      </button>`}
     `;
   } else if (active.phase === 'set-running') {
     let inputHtml;
@@ -2457,6 +2425,48 @@ function renderWorkout() {
       }</div>`
     : '';
 
+  // ---- Warmup / cooldown checklist (kept from the section screen) ----
+  let checklistHtml = '';
+  if (isWcCtx) {
+    const secItems = sectionItems(section);
+    const rows = secItems.map(e => {
+      const i = active.exercises.indexOf(e);
+      const done = e.completedSets.length > 0;
+      const current = e === ex;
+      return `<div class="wc-check-item ${current ? 'current' : ''} ${done ? 'done' : ''}" data-wc-jump="${i}">
+        <span class="wc-check-box">${done ? '<svg viewBox="0 0 24 24"><path d="M5 12 L10 17 L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' : ''}</span>
+        <span class="wc-check-name">${escapeHtml(e.name)}</span>
+        <span class="wc-check-dur">${e.wcDurationSec > 0 ? e.wcDurationSec + 's' : 'reps'}</span>
+      </div>`;
+    }).join('');
+    const doneCount = secItems.filter(e => e.completedSets.length > 0).length;
+    checklistHtml = `
+      <div class="wc-checklist">${rows}</div>
+      <div class="wc-progress-line">${doneCount}/${secItems.length} items done</div>
+      <button class="skill-skip-link" id="btn-wc-skip" type="button">${section === 'warmup' ? 'Skip to workout' : 'Skip cooldown'}</button>
+    `;
+  }
+
+  // ---- Totals chips (section-aware) ----
+  let totalsHtml;
+  if (section === 'main') {
+    const mainList = active.exercises.filter(e => getExSection(e) === 'main');
+    const mTotalSets = mainList.reduce((s,e) => s + e.sets, 0);
+    const mCompletedSets = mainList.reduce((s,e) => s + e.completedSets.length, 0);
+    totalsHtml = `
+      <span class="workout-total-chip">Exercise <span class="val">${mainList.indexOf(ex) + 1}/${mainList.length}</span></span>
+      <span class="workout-total-chip">Sets done <span class="val">${mCompletedSets}/${mTotalSets}</span></span>
+    `;
+  } else {
+    const secItems = sectionItems(section);
+    const pos = secItems.indexOf(ex) + 1;
+    const doneCount = secItems.filter(e => e.completedSets.length > 0).length;
+    totalsHtml = `
+      <span class="workout-total-chip">${section === 'warmup' ? 'Warm Up' : 'Cool Down'} <span class="val">${pos}/${secItems.length}</span></span>
+      <span class="workout-total-chip">Done <span class="val">${doneCount}/${secItems.length}</span></span>
+    `;
+  }
+
   // ---- Compose unified screen ----
   const html = `
     <div class="workout-phase-label${phaseLabelClass}">${phaseLabel}${setAdjustHtml}</div>
@@ -2467,10 +2477,8 @@ function renderWorkout() {
     ${skillProgressHtml}
     <div class="workout-timer-area">${timerHtml}</div>
     <div class="workout-bottom-controls">${bottomHtml}</div>
-    <div class="workout-totals">
-      <span class="workout-total-chip">Exercise <span class="val">${active.exerciseIdx+1}/${active.exercises.length}</span></span>
-      <span class="workout-total-chip">Sets done <span class="val">${completedSets}/${totalSets}</span></span>
-    </div>
+    ${checklistHtml}
+    <div class="workout-totals">${totalsHtml}</div>
   `;
 
   screen.innerHTML = html;
@@ -2593,14 +2601,31 @@ function attachWorkoutHandlers() {
       evaluateSkillStage(ex, skillStage, reps, duration);
     }
 
-    // Change 10: if this was the LAST set of the LAST exercise, complete workout directly
+    // Section-aware advancement: last set of the exercise decides what's next.
     const isLastSet = active.setIdx + 1 >= ex.sets;
-    const isLastExercise = active.exerciseIdx + 1 >= active.exercises.length;
-    if (isLastSet && isLastExercise) {
-      completeWorkout();
+    if (isLastSet) {
+      const nextEx = active.exercises[active.exerciseIdx + 1];
+      const section = getExSection(ex);
+      if (!nextEx || getExSection(nextEx) !== section) {
+        // Last item of its section → transition (warmup→main, main→cooldown,
+        // or the whole workout is finished).
+        onSectionBoundary(ex, nextEx);
+        return;
+      }
+      // Same section → rest if configured, then the next item/exercise.
+      const rest = section === 'main'
+        ? (ex.restSeconds || 90)
+        : (Number(ex.restSeconds) > 0 ? Number(ex.restSeconds) : 0);
+      if (rest <= 0) {
+        advanceToNextSet();
+        return;
+      }
+      active.phase = 'rest';
+      saveActive();
+      startRestTimer(rest);
       return;
     }
-    // Otherwise, proceed with rest timer as before
+    // More sets of this exercise remain → standard rest
     active.phase = 'rest';
     saveActive();
     startRestTimer(ex.restSeconds || 90);
@@ -2626,6 +2651,15 @@ function attachWorkoutHandlers() {
   if (restPause) restPause.addEventListener('click', () => {
     if (active.paused) resumeRest(); else pauseRest();
   });
+
+  // Warmup / cooldown checklist: tap an item to jump to it, or skip the section
+  document.querySelectorAll('[data-wc-jump]').forEach(row => {
+    row.addEventListener('click', () => {
+      jumpToSectionItem(parseInt(row.getAttribute('data-wc-jump'), 10));
+    });
+  });
+  const wcSkipBtn = document.getElementById('btn-wc-skip');
+  if (wcSkipBtn) wcSkipBtn.addEventListener('click', skipSection);
 }
 
 /* ============================================================
@@ -2914,7 +2948,7 @@ function renderCindy(screen) {
     `;
     document.getElementById('btn-cindy-save').addEventListener('click', () => {
       // Gate: if the day has a cooldown section, do it before finishing
-      if (Array.isArray(active.cooldownItems) && active.cooldownItems.length > 0) {
+      if (Array.isArray(active.pendingCooldown) && active.pendingCooldown.length > 0) {
         enterCooldownPhase();
         return;
       }
@@ -3037,11 +3071,7 @@ function finalizeCindyWorkout() {
    ============================================================ */
 function completeWorkout() {
   if (!active) return;
-  // Gate: if the day has a cooldown section, show it before the summary
-  if (Array.isArray(active.cooldownItems) && active.cooldownItems.length > 0) {
-    enterCooldownPhase();
-    return;
-  }
+  if (active.type === 'cindy') { finalizeCindyWorkout(); return; }
   finalizeStrengthWorkout();
 }
 
@@ -3049,8 +3079,10 @@ function finalizeStrengthWorkout() {
   if (!active) return;
   const durationSec = Math.floor(((active.mainEndAt || Date.now()) - active.startedAt) / 1000);
 
-  // Build history entry from completed sets
-  const exercises = active.exercises.map(ex => ({
+  // Build history entry from completed sets — MAIN exercises only.
+  // (Warmup / cooldown section items are guided, not logged.)
+  const mainExercises = (active.exercises || []).filter(e => getExSection(e) === 'main');
+  const exercises = mainExercises.map(ex => ({
     id: ex.id,
     name: ex.name,
     type: ex.type || 'strength',
@@ -3215,6 +3247,8 @@ function showNoteModal() {
    ============================================================ */
 function togglePauseWorkout() {
   if (!active) return;
+  // Legacy warmup/cooldown saved state → convert first.
+  if (active.phase === 'warmup' || active.phase === 'cooldown') migrateLegacyWc();
   if (active.paused) {
     // resume
     active.paused = false;
@@ -3245,16 +3279,6 @@ function togglePauseWorkout() {
       delete active.pauseStartedAt;
       saveActive();
       startPrepTimer();
-    } else if (active.phase === 'warmup' || active.phase === 'cooldown') {
-      // resume the item countdown where it froze
-      if (active.wcPauseRemainingMs != null && active.wcDurationMs) {
-        active.wcEndsAt = Date.now() + active.wcPauseRemainingMs;
-        delete active.wcPauseRemainingMs;
-      }
-      delete active.pauseStartedAt;
-      saveActive();
-      renderWorkout();
-      if (!wcTimerHandle) startWcIntervalOnly();
     }
     showToast('Workout resumed');
   } else {
@@ -3269,10 +3293,6 @@ function togglePauseWorkout() {
     } else if (active.phase === 'prep') {
       active.pauseStartedAt = Date.now();
       if (setTimerHandle) { clearInterval(setTimerHandle); setTimerHandle = null; }
-    } else if (active.phase === 'warmup' || active.phase === 'cooldown') {
-      active.pauseStartedAt = Date.now();
-      if (active.wcEndsAt) active.wcPauseRemainingMs = active.wcEndsAt - Date.now();
-      stopWcTimer();
     }
     saveActive();
     showToast('Workout paused', 'warn');
@@ -3691,14 +3711,23 @@ function renderPlan() {
       const wcItems = Array.isArray(day[wcKind]) ? day[wcKind] : [];
       const block = document.createElement('div');
       block.className = 'plan-edit-wc neu-raised-sm';
-      const rows = wcItems.map((it, i) => `
+      const rows = wcItems.map((it, i) => {
+        const ytUrl = ((it.mediaLinks || []).find(m => (m.type || detectMediaType(m.url)) === 'youtube') || {}).url || '';
+        return `
         <div class="plan-edit-wc-item">
-          <input type="text" class="plan-edit-wc-name" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="name" value="${escapeHtml(it.name || '').replace(/"/g, '&quot;')}" placeholder="Item name">
-          <input type="number" class="plan-edit-wc-dur" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="durationSec" min="0" max="600" step="5" value="${it.durationSec != null ? it.durationSec : ''}" placeholder="sec" inputmode="numeric" title="Duration in seconds — 0 or blank = checklist item without a timer">
-          <input type="text" class="plan-edit-wc-note" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="note" value="${escapeHtml(it.note || '').replace(/"/g, '&quot;')}" placeholder="Note (optional)">
-          <button class="plan-edit-mini-btn danger" data-wc-remove-kind="${wcKind}" data-wc-remove="${i}" type="button">Remove</button>
+          <div class="plan-edit-wc-row">
+            <input type="text" class="plan-edit-wc-name" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="name" value="${escapeHtml(it.name || '').replace(/"/g, '&quot;')}" placeholder="Item name">
+            <input type="number" class="plan-edit-wc-dur" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="durationSec" min="0" max="600" step="5" value="${it.durationSec != null ? it.durationSec : ''}" placeholder="sec" inputmode="numeric" title="Duration in seconds — 0 or blank = reps-based item (no timer)">
+            <input type="text" class="plan-edit-wc-note" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="note" value="${escapeHtml(it.note || '').replace(/"/g, '&quot;')}" placeholder="Note (optional)">
+            <button class="plan-edit-mini-btn danger" data-wc-remove-kind="${wcKind}" data-wc-remove="${i}" type="button">Remove</button>
+          </div>
+          <div class="plan-edit-wc-media-row">
+            <label class="plan-edit-media-label" style="color:var(--c-accent-bright);">YouTube</label>
+            <input type="url" class="plan-edit-media-input" data-wc-kind="${wcKind}" data-wc-idx="${i}" data-wc-field="youtube" value="${escapeHtml(ytUrl).replace(/"/g, '&quot;')}" placeholder="https://youtube.com/watch?v=… (form video — shown during the workout)">
+          </div>
         </div>
-      `).join('');
+        `;
+      }).join('');
       block.innerHTML = `
         <div class="plan-edit-wc-title ${wcKind}">${wcKind === 'warmup' ? 'Warmup (optional)' : 'Cooldown (optional)'}</div>
         <div class="plan-edit-wc-list">${rows || '<div class="plan-edit-wc-empty">None — this day starts/ends directly. Add items below if you want.</div>'}</div>
@@ -3861,6 +3890,18 @@ function renderPlan() {
           const v = parseIntSafe(input.value, 10);
           if (isNaN(v) || v <= 0) delete it.durationSec;
           else it.durationSec = Math.min(600, v);
+        } else if (field === 'youtube') {
+          // YouTube form-video link per warmup/cooldown item
+          const url = input.value.trim();
+          if (!Array.isArray(it.mediaLinks)) it.mediaLinks = [];
+          let entry = it.mediaLinks.find(m => (m.type || detectMediaType(m.url)) === 'youtube');
+          if (!url) {
+            if (entry) it.mediaLinks = it.mediaLinks.filter(m => m !== entry);
+          } else if (!entry) {
+            it.mediaLinks.push({ type: 'youtube', label: 'YouTube', url });
+          } else {
+            entry.url = url;
+          }
         } else {
           it[field] = input.value;
         }
@@ -6177,7 +6218,7 @@ function init() {
   document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.getAttribute('data-view');
-      if (active && (active.phase === 'set-running' || active.phase === 'rest' || active.phase === 'cindy-running' || active.phase === 'prep' || active.phase === 'warmup' || active.phase === 'cooldown')) {
+      if (active && (active.phase === 'set-running' || active.phase === 'rest' || active.phase === 'cindy-running' || active.phase === 'prep')) {
         // allow but warn
         if (target !== 'home') {
           showModal(`

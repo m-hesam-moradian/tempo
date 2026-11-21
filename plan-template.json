@@ -1,36 +1,25 @@
 {
   "_comment_about_this_file": "This is a TEMPLATE / SCHEMA REFERENCE for the TEMPO workout planner. Every option TEMPO supports is shown below. Send this whole file to ChatGPT / Claude / Gemini and ask it to generate a custom plan in the same shape — every field is explained inline so the AI knows exactly what's allowed.",
-
   "format": "tempo-workout-plan",
   "_comment_format": "REQUIRED — must be exactly 'tempo-workout-plan'. Used by TEMPO to recognize the file.",
-
   "version": 1,
   "_comment_version": "REQUIRED — currently 1. Reserved for future schema upgrades.",
-
   "name": "My Custom Plan",
   "_comment_name": "REQUIRED — human-readable plan name shown in the Plan tab.",
-
   "description": "Optional short description of the program — goals, philosophy, anything.",
   "_comment_description": "OPTIONAL — free-text description shown in the Plan tab header.",
-
   "_comment_days": "REQUIRED — array of day objects. Must contain all 7 days: monday, tuesday, wednesday, thursday, friday, saturday, sunday. Each day has its own type. The 4 valid day types are: 'strength', 'cindy', 'rest', 'skill'.",
-
   "days": [
     {
       "_comment": "DAY TYPE 1 OF 4 — STRENGTH. The most common type. Normal set-by-set flow: Start Set → enter reps → Done → rest timer. This example shows every field an exercise can have.",
-
       "id": "monday",
       "_comment_id": "REQUIRED — lowercase day name without spaces. Must be one of: monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
-
       "day": "Monday",
       "_comment_day": "REQUIRED — display name (capitalized).",
-
       "workoutName": "Push Day",
       "_comment_workoutName": "REQUIRED — name of this day's workout (e.g. 'Push Day', 'Legs + Core').",
-
       "type": "strength",
       "_comment_type_day": "REQUIRED — one of: 'strength' | 'cindy' | 'rest' | 'skill'. 'strength' = normal set-by-set flow.",
-
       "warmup": [
         {
           "id": "jumpingjacks",
@@ -46,7 +35,6 @@
         }
       ],
       "_comment_warmup": "OPTIONAL — remove this array entirely (or leave empty) for days that should start directly.",
-
       "cooldown": [
         {
           "id": "cheststretch",
@@ -62,30 +50,22 @@
         }
       ],
       "_comment_cooldown": "OPTIONAL — remove or leave empty to finish straight into the summary screen.",
-
       "exercises": [
         {
           "id": "benchpress",
           "_comment_ex_id": "REQUIRED — stable identifier (no spaces). Used to track this exercise across history even if you rename it later.",
-
           "name": "Bench Press",
           "_comment_ex_name": "REQUIRED — display name.",
-
           "sets": 4,
           "_comment_sets": "REQUIRED — number of sets (integer ≥ 1). The app will guide the user through this many sets.",
-
           "restSeconds": 120,
           "_comment_restSeconds": "REQUIRED — rest duration in seconds after each set (integer ≥ 0). 90 is typical for strength, 60 for accessory work, 120+ for big compound lifts.",
-
           "secondsPerRep": 4,
           "_comment_secondsPerRep": "OPTIONAL — TEMPO COACH. Ideal seconds per rep, e.g. push-ups = 4 (1s up, 1s pause, 2s negative). After each set the app compares your real set time vs reps × secondsPerRep and pops a colored toast: green = perfect tempo (within ±10%), orange = too fast ('calm down'), blue = too slow ('pick up the pace'). Omit this field (or set 0) to disable tempo feedback for that exercise. Only meaningful for rep-counting exercises and skill stages measured in reps — timed exercises and second-based skill holds ignore it. Examples: push-up / pull-up / row ≈ 4s, press / curl / raise / squat ≈ 3s, calf raise / band pull-apart / scapular work ≈ 2s.",
-
           "type": "strength",
           "_comment_ex_type": "OPTIONAL — exercise type. One of: 'strength' (default, rep-counting) | 'timed' (hold for time, like Plank) | 'skill' (practice-based, like Handstand). If omitted, defaults to 'strength'.",
-
           "note": "Controlled tempo · 2-sec pause at chest · full lockout",
           "_comment_ex_note": "OPTIONAL — form cues / coaching notes shown during the workout.",
-
           "mediaLinks": [
             {
               "type": "youtube",
@@ -139,30 +119,23 @@
         }
       ]
     },
-
     {
       "_comment": "DAY TYPE 2 OF 4 — CINDY. AMRAP (As Many Rounds As Possible) mode. 20-minute countdown + round counter. Used for the famous 'Cindy' CrossFit workout but works for any AMRAP scheme.",
-
       "id": "tuesday",
       "day": "Tuesday",
       "workoutName": "Cindy 20-min AMRAP",
       "type": "cindy",
       "_comment_cindy_day": "type='cindy'. The exercises array MUST be empty []. The actual workout is defined in the 'cindy' object below.",
-
       "exercises": [],
       "_comment_cindy_exercises": "REQUIRED — must be an empty array [] for cindy days. (TEMPO will migrate legacy plans that put exercises here, but new plans should use the cindy object.)",
-
       "note": "20-minute AMRAP. Cycle through the scheme as many times as possible. Track total completed rounds.",
       "_comment_cindy_note": "OPTIONAL — instructions shown on the day overview.",
-
       "durationSeconds": 1200,
       "_comment_cindy_durationSeconds": "OPTIONAL at day level — duration in seconds. Default 1200 (20 min). Also stored inside cindy.durationSeconds.",
-
       "cindy": {
         "_comment_cindy_object": "REQUIRED for cindy days — defines the AMRAP structure.",
         "durationSeconds": 1200,
         "_comment_cindy_dur": "REQUIRED — countdown duration in seconds. 1200 = 20 minutes. 600 = 10 minutes. 1800 = 30 minutes.",
-
         "scheme": [
           {
             "id": "cindyPullups",
@@ -178,7 +151,11 @@
             "name": "Push-ups",
             "reps": 10,
             "mediaLinks": [
-              { "type": "youtube", "label": "Form", "url": "https://www.youtube.com/watch?v=14D-2c9kvVw" }
+              {
+                "type": "youtube",
+                "label": "Form",
+                "url": "https://www.youtube.com/watch?v=14D-2c9kvVw"
+              }
             ]
           },
           {
@@ -191,25 +168,19 @@
         "_comment_scheme": "REQUIRED — array of movements performed each round. User completes one round = one entry of each movement at the listed reps, then repeats until time runs out."
       }
     },
-
     {
       "_comment": "DAY TYPE 3 OF 4 — REST. No workout. User just logs an optional activity note (e.g. 'light walk'). Used for recovery / backup days.",
-
       "id": "thursday",
       "day": "Thursday",
       "workoutName": "Recovery",
       "type": "rest",
       "_comment_rest_day": "type='rest'. No exercises, no cindy object. Just an optional restNote.",
-
       "exercises": [],
       "_comment_rest_exercises": "REQUIRED — must be empty array [] for rest days.",
-
       "restNote": "Light cardio, mobility, or full rest. Recovery is when you actually get stronger."
     },
-
     {
-      "_comment": "DAY TYPE 4 OF 4 — SKILL. Reserved for pure skill-practice days. Behaves like a strength day but the exercises are typically type='skill' with 1 set and longer practice time. NOTE: TEMPO currently renders skill days the same as strength days — the distinction is mostly semantic. You can also just use type='strength' with type='skill' exercises inside.",
-
+      "_comment": "DAY TYPE 4 OF 4 — SKILL. Reserved for pure skill-practice days. Behaves like a strength day but the exercises are typically type='skill' with 1 set and longer practice time. NOTE: TEMPO currently renders skill days the same as strength days — the distinction is mostly semantic. You can also just use type='strength' with type='skill' exercises inside. warmup/cooldown are optional per-day sections; each item behaves like a mini exercise.",
       "id": "saturday",
       "day": "Saturday",
       "workoutName": "Skill Day",
@@ -231,9 +202,37 @@
           "type": "skill",
           "note": "Pull-up → high pull-up → chest-to-bar → band-assisted → muscle-up"
         }
+      ],
+      "warmup": [
+        {
+          "id": "wu-example",
+          "name": "Jumping Jacks",
+          "durationSec": 60,
+          "note": "Raise body temperature",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=..."
+            }
+          ]
+        },
+        {
+          "id": "wu-example2",
+          "name": "Band Pull-Aparts",
+          "durationSec": null,
+          "note": "Reps-based item — enter reps at Done"
+        }
+      ],
+      "cooldown": [
+        {
+          "id": "cd-example",
+          "name": "Doorway Chest Stretch",
+          "durationSec": 60,
+          "note": "Elbows at 90°, lean through the doorframe"
+        }
       ]
     },
-
     {
       "_comment": "STRENGTH DAY WITH MEDIA LINKS — second strength day showing a fuller Push/Pull/Legs style example.",
       "id": "wednesday",
@@ -249,7 +248,11 @@
           "type": "strength",
           "note": "Hip hinge · controlled eccentric · no bouncing",
           "mediaLinks": [
-            { "type": "youtube", "label": "Form", "url": "https://www.youtube.com/watch?v=op9kVnSso6Q" }
+            {
+              "type": "youtube",
+              "label": "Form",
+              "url": "https://www.youtube.com/watch?v=op9kVnSso6Q"
+            }
           ]
         },
         {
@@ -270,7 +273,6 @@
         }
       ]
     },
-
     {
       "_comment": "PLAIN REST DAY — minimal example.",
       "id": "friday",
@@ -280,7 +282,6 @@
       "exercises": [],
       "restNote": "Free day. Do what you enjoy — or nothing at all."
     },
-
     {
       "_comment": "STRENGTH DAY — minimal example with only required fields. This is the shortest valid strength day.",
       "id": "sunday",
@@ -288,12 +289,26 @@
       "workoutName": "Legs",
       "type": "strength",
       "exercises": [
-        { "id": "squats", "name": "Squats", "sets": 4, "restSeconds": 120 },
-        { "id": "lunges", "name": "Lunges", "sets": 3, "restSeconds": 90 },
-        { "id": "calfraises", "name": "Calf Raises", "sets": 3, "restSeconds": 60 }
+        {
+          "id": "squats",
+          "name": "Squats",
+          "sets": 4,
+          "restSeconds": 120
+        },
+        {
+          "id": "lunges",
+          "name": "Lunges",
+          "sets": 3,
+          "restSeconds": 90
+        },
+        {
+          "id": "calfraises",
+          "name": "Calf Raises",
+          "sets": 3,
+          "restSeconds": 60
+        }
       ]
     }
   ],
-
-  "_comment_summary": "QUICK REFERENCE — every option TEMPO supports:\n\nDAY TYPES (day.type): 'strength' | 'cindy' | 'rest' | 'skill'\nEXERCISE TYPES (exercise.type): 'strength' | 'timed' | 'skill'  (different from day types!)\nMEDIA TYPES (mediaLinks.type): 'youtube' | 'image' | 'video' | 'link'\n\nREQUIRED PLAN FIELDS: format, version, name, days[]\nREQUIRED DAY FIELDS: id, day, workoutName, type, exercises[]\nREQUIRED EXERCISE FIELDS: id, name, sets, restSeconds\nOPTIONAL EXERCISE FIELDS: type, note, mediaLinks[]\nREQUIRED CINDY FIELDS (if type='cindy'): cindy.durationSeconds, cindy.scheme[]\nREQUIRED SCHEME FIELDS: id, name, reps\nOPTIONAL SCHEME FIELDS: mediaLinks[]\nOPTIONAL REST FIELDS (if type='rest'): restNote\n\nLEGACY TYPES STILL ACCEPTED ON IMPORT (auto-migrated): 'strength_skill' → 'strength', 'amrap' → 'cindy', 'cardio' → 'rest'.\n\nVALID DAY IDS: monday, tuesday, wednesday, thursday, friday, saturday, sunday (all 7 must be present, order doesn't matter)."
+  "_comment_summary": "QUICK REFERENCE — every option TEMPO supports:\n\nDAY TYPES (day.type): 'strength' | 'cindy' | 'rest' | 'skill'\nEXERCISE TYPES (exercise.type): 'strength' | 'timed' | 'skill'  (different from day types!)\nMEDIA TYPES (mediaLinks.type): 'youtube' | 'image' | 'video' | 'link'\n\nREQUIRED PLAN FIELDS: format, version, name, days[]\nREQUIRED DAY FIELDS: id, day, workoutName, type, exercises[]\nREQUIRED EXERCISE FIELDS: id, name, sets, restSeconds\nOPTIONAL EXERCISE FIELDS: type, note, mediaLinks[]\nREQUIRED CINDY FIELDS (if type='cindy'): cindy.durationSeconds, cindy.scheme[]\nREQUIRED SCHEME FIELDS: id, name, reps\nOPTIONAL SCHEME FIELDS: mediaLinks[]\nOPTIONAL REST FIELDS (if type='rest'): restNote\nOPTIONAL DAY SECTIONS: warmup[] and cooldown[] — guided item lists shown before/after the main workout.\n  Warmup: a 'Warm up first?' choice appears when the workout starts (pick Warmup First or Direct Start).\n  Cooldown: runs right after the last main exercise (or after the Cindy timer), before the completion screen.\n  Each item runs through the SAME engine as main exercises: prep countdown -> set timer (-1s/Edit/+1s) -> Done.\n  Item fields: id (req), name (req), durationSec (optional — >0 = timed item with a target bar; blank/0 = reps-based),\n               note (optional), mediaLinks[] (optional — e.g. a YouTube form video), restSeconds (optional, default 0),\n               prepSeconds (optional, default 3).\n\nLEGACY TYPES STILL ACCEPTED ON IMPORT (auto-migrated): 'strength_skill' → 'strength', 'amrap' → 'cindy', 'cardio' → 'rest'.\n\nVALID DAY IDS: monday, tuesday, wednesday, thursday, friday, saturday, sunday (all 7 must be present, order doesn't matter)."
 }

@@ -2541,6 +2541,33 @@ input, textarea, select { font-family: inherit; }
 .timer-ring.cool { --timer-ring-color: #4fc3f7; }
 .timer-ring.cool .timer-ring-progress { filter: drop-shadow(0 0 5px rgba(79,195,247,0.45)); }
 .timer-ring.cool .workout-timer.rest { color: #4fc3f7; text-shadow: 0 0 24px rgba(79,195,247,0.4); }
+/* Target progress bar under the set timer (timed warmup/cooldown items) */
+.wc-target-bar {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+  margin: 10px auto 0;
+  width: min(320px, 82%);
+}
+.wc-target-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-bright));
+  box-shadow: 0 0 10px rgba(79,209,199,0.5);
+  transition: width 0.25s linear;
+}
+.wc-target-hint {
+  margin-top: 6px;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--c-text-faint);
+  text-align: center;
+}
+.wc-target-hint.hit { color: #39FF14; text-shadow: 0 0 14px rgba(57,255,20,0.45); }
 .wc-checklist {
   display: flex;
   flex-direction: column;
@@ -2630,9 +2657,41 @@ input, textarea, select { font-family: inherit; }
   gap: 8px;
 }
 .plan-edit-wc-item {
+  display: block;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.18);
+}
+.plan-edit-wc-row {
   display: flex;
   gap: 6px;
   align-items: center;
+}
+.plan-edit-wc-media-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.plan-edit-wc-media-row .plan-edit-media-label {
+  flex: 0 0 64px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.plan-edit-wc-media-row .plan-edit-media-input {
+  flex: 1;
+  height: 34px;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 11.5px;
+  color: var(--c-text);
+  background: var(--c-bg-deep);
+  box-shadow: var(--shadow-in-dark-sm), var(--shadow-in-light-sm);
+  min-width: 0;
 }
 .plan-edit-wc-item input {
   height: 36px;
@@ -2654,7 +2713,6 @@ input, textarea, select { font-family: inherit; }
   color: var(--c-text-faint);
   padding: 4px 0;
 }
-
 /* ============ RESUME PROMPT ============ */
 .resume-banner {
   padding: 14px 16px;

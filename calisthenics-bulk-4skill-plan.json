@@ -14,19 +14,40 @@
           "id": "wu-jj",
           "name": "Jumping Jacks",
           "durationSec": 60,
-          "note": "Raise body temperature, get blood flowing"
+          "note": "Raise body temperature, get blood flowing",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=uLVt6u15L98"
+            }
+          ]
         },
         {
           "id": "wu-armcircles",
           "name": "Arm Circles",
           "durationSec": 30,
-          "note": "30s forward + 30s backward — small to big circles"
+          "note": "30s forward + 30s backward — small to big circles",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=bP52FXTlzjA"
+            }
+          ]
         },
         {
           "id": "wu-wallslides",
           "name": "Wall Slides",
           "durationSec": 45,
-          "note": "Shoulder mobility — keep contact with the wall"
+          "note": "Shoulder mobility — keep contact with the wall",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=ywYi4rBhRBQ"
+            }
+          ]
         }
       ],
       "cooldown": [
@@ -34,25 +55,53 @@
           "id": "cd-chest",
           "name": "Doorway Chest Stretch",
           "durationSec": 60,
-          "note": "Elbows at 90°, lean through the doorframe"
+          "note": "Elbows at 90°, lean through the doorframe",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=B9uY01NoqBg"
+            }
+          ]
         },
         {
           "id": "cd-triceps",
           "name": "Overhead Triceps Stretch",
           "durationSec": 45,
-          "note": "Per side, pull elbow behind head"
+          "note": "Per side, pull elbow behind head",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=yAvpW_zKJmI"
+            }
+          ]
         },
         {
           "id": "cd-shoulder",
           "name": "Cross-Body Shoulder Stretch",
           "durationSec": 45,
-          "note": "Per side, pull arm across chest"
+          "note": "Per side, pull arm across chest",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=q1QZ3h8HVtw"
+            }
+          ]
         },
         {
           "id": "cd-wrists",
           "name": "Kneeling Wrist Stretch",
           "durationSec": 45,
-          "note": "Palms down then palms up on floor, gentle rocks"
+          "note": "Palms down then palms up on floor, gentle rocks",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=AxqumgNBTy8"
+            }
+          ]
         }
       ],
       "exercises": [
@@ -338,7 +387,14 @@
         {
           "id": "wu-jj2",
           "name": "Jumping Jacks",
-          "durationSec": 60
+          "durationSec": 60,
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=uLVt6u15L98"
+            }
+          ]
         },
         {
           "id": "wu-catcow",
@@ -350,7 +406,14 @@
           "id": "wu-torso",
           "name": "Standing Torso Twists",
           "durationSec": 30,
-          "note": "Loosen obliques before manna work"
+          "note": "Loosen obliques before manna work",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=h6XyzlM8m24"
+            }
+          ]
         }
       ],
       "cooldown": [
@@ -358,25 +421,53 @@
           "id": "cd-cobra",
           "name": "Cobra Stretch",
           "durationSec": 45,
-          "note": "Open the abs after hollow/manna work"
+          "note": "Open the abs after hollow/manna work",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=n6jrC6WeF84"
+            }
+          ]
         },
         {
           "id": "cd-childs",
           "name": "Child's Pose",
           "durationSec": 60,
-          "note": "Decompress the spine, breathe deep"
+          "note": "Decompress the spine, breathe deep",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=2MJGg-dUKh0"
+            }
+          ]
         },
         {
           "id": "cd-biceps",
           "name": "Wall Biceps Stretch",
           "durationSec": 45,
-          "note": "Arm behind, palm flat on wall, turn away"
+          "note": "Arm behind, palm flat on wall, turn away",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=QY4gCIYbGQk"
+            }
+          ]
         },
         {
           "id": "cd-fold",
           "name": "Seated Forward Fold",
           "durationSec": 60,
-          "note": "Hamstrings + calm-down breaths"
+          "note": "Hamstrings + calm-down breaths",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=1mwwxcMDDy8"
+            }
+          ]
         }
       ],
       "exercises": [
@@ -646,13 +737,27 @@
         {
           "id": "wu-jj3",
           "name": "Jumping Jacks",
-          "durationSec": 60
+          "durationSec": 60,
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=uLVt6u15L98"
+            }
+          ]
         },
         {
           "id": "wu-armcircles2",
           "name": "Arm Circles",
           "durationSec": 30,
-          "note": "Prep shoulders for hanging work"
+          "note": "Prep shoulders for hanging work",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=bP52FXTlzjA"
+            }
+          ]
         },
         {
           "id": "wu-scapcircles",
@@ -666,25 +771,53 @@
           "id": "cd-lat",
           "name": "Hanging Lat Stretch",
           "durationSec": 45,
-          "note": "Hang, push hips to one side then the other"
+          "note": "Hang, push hips to one side then the other",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=NUv1WpYA_x8"
+            }
+          ]
         },
         {
           "id": "cd-biceps2",
           "name": "Standing Biceps Wall Stretch",
           "durationSec": 45,
-          "note": "Per side"
+          "note": "Per side",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=QY4gCIYbGQk"
+            }
+          ]
         },
         {
           "id": "cd-neck",
           "name": "Neck + Upper Trap Release",
           "durationSec": 30,
-          "note": "Slow ear-to-shoulder, gentle"
+          "note": "Slow ear-to-shoulder, gentle",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=-r0eoFS7_5Q"
+            }
+          ]
         },
         {
           "id": "cd-forearm",
           "name": "Forearm & Grip Stretch",
           "durationSec": 45,
-          "note": "Pull-back on all fingers, then wrist extension"
+          "note": "Pull-back on all fingers, then wrist extension",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=gRmAdcJvGJ0"
+            }
+          ]
         }
       ],
       "exercises": [
@@ -933,19 +1066,40 @@
         {
           "id": "wu-jj4",
           "name": "Jumping Jacks",
-          "durationSec": 60
+          "durationSec": 60,
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=uLVt6u15L98"
+            }
+          ]
         },
         {
           "id": "wu-legswings",
           "name": "Leg Swings",
           "durationSec": 30,
-          "note": "Front-to-back + lateral, per leg"
+          "note": "Front-to-back + lateral, per leg",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=difYoBtZi2s"
+            }
+          ]
         },
         {
           "id": "wu-hipcircles",
           "name": "Hip Circles",
           "durationSec": 30,
-          "note": "Deep, slow circles both directions"
+          "note": "Deep, slow circles both directions",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=JYqLwajOGjI"
+            }
+          ]
         }
       ],
       "cooldown": [
@@ -953,13 +1107,27 @@
           "id": "cd-quad",
           "name": "Standing Quad Stretch",
           "durationSec": 45,
-          "note": "Pull heel to glute, per side"
+          "note": "Pull heel to glute, per side",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=kzAsm4WQqvQ"
+            }
+          ]
         },
         {
           "id": "cd-hamstring",
           "name": "Seated Hamstring Fold",
           "durationSec": 60,
-          "note": "Straight spine, hinge forward"
+          "note": "Straight spine, hinge forward",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=wr_8aak4Wbc"
+            }
+          ]
         },
         {
           "id": "cd-glute",
@@ -971,13 +1139,27 @@
           "id": "cd-calf",
           "name": "Wall Calf Stretch",
           "durationSec": 45,
-          "note": "Back leg straight, heel down — per side"
+          "note": "Back leg straight, heel down — per side",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=YTYQo4WvJHA"
+            }
+          ]
         },
         {
           "id": "cd-ankle",
           "name": "Knee-to-Wall Ankle Stretch",
           "durationSec": 30,
-          "note": "Per side — ankle mobility for pistols"
+          "note": "Per side — ankle mobility for pistols",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=Y1IZXkdPPdw"
+            }
+          ]
         }
       ],
       "exercises": [
@@ -1222,19 +1404,40 @@
         {
           "id": "wu-jj5",
           "name": "Jumping Jacks",
-          "durationSec": 60
+          "durationSec": 60,
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=uLVt6u15L98"
+            }
+          ]
         },
         {
           "id": "wu-airsquat",
           "name": "Air Squats",
           "durationSec": 45,
-          "note": "Slow + deep, groove the pattern"
+          "note": "Slow + deep, groove the pattern",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=rMvwVtlqjTE"
+            }
+          ]
         },
         {
           "id": "wu-pushupprep",
           "name": "Push-up Position Shoulder Taps",
           "durationSec": 30,
-          "note": "Wake up the push muscles"
+          "note": "Wake up the push muscles",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=H9qt3frCgTY"
+            }
+          ]
         }
       ],
       "cooldown": [
@@ -1247,13 +1450,27 @@
         {
           "id": "cd-chest2",
           "name": "Doorway Chest Stretch",
-          "durationSec": 45
+          "durationSec": 45,
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=B9uY01NoqBg"
+            }
+          ]
         },
         {
           "id": "cd-quad2",
           "name": "Standing Quad Stretch",
           "durationSec": 30,
-          "note": "Per side"
+          "note": "Per side",
+          "mediaLinks": [
+            {
+              "type": "youtube",
+              "label": "YouTube",
+              "url": "https://www.youtube.com/watch?v=kzAsm4WQqvQ"
+            }
+          ]
         },
         {
           "id": "cd-squathold",
