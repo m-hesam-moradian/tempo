@@ -1,0 +1,11 @@
+skills/
+node_modules/
+
+# Sandbox-only directories — never push to GitHub Pages
+download/
+skills/
+scripts/
+tool-results/
+upload/
+.env
+.nojekyll.bak
