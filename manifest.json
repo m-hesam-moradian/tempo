@@ -1,0 +1,44 @@
+{
+  "name": "TEMPO — Workout Tracker",
+  "short_name": "TEMPO",
+  "description": "Your workout. Your tempo. Set-by-set coaching, rest timers, history, and music — all stored locally.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a242c",
+  "theme_color": "#1a242c",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
